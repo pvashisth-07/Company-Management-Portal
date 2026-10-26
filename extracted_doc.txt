@@ -1,0 +1,1724 @@
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314 Lab Assignment 1: Solution
+Project Identification
+Item
+Details
+Project Name
+Company Engagement Portal
+Project Type
+Web-based institutional company and industry engagement management system
+Team ID
+T066
+Team Members
+Hitesh Jain, Anand Patidar, Pranav Vashisth, Avesh Khan
+Roll Numbers
+24UCS123, 24UCS125, 24UCS126, 24UCS127
+Development Model
+Agile + Incremental Development
+Primary Users
+Institutional users involved in company engagement and recruitment activities
+Development Team
+Student software development team
+Course
+Software Engineering
+Project Objective
+To develop a centralized portal for managing institutional interactions with recruiting companies and industry organizations, including company profiles, contacts, visits, recruitment activities, and engagement history.
+Expected Outcome
+A centralized and organized system for recording, managing, and tracking company profiles, contacts, visits, recruitment activities, and
+institutional engagement history.
+Project Background Current Problem
+Managing company profiles, contact details, visits, recruitment activities, and engagement history through scattered or manual records can be difficult. It can also make tracking previous company interactions less efficient.
+Proposed Solution
+The Company Engagement Portal will centralize company-related information and institutional interactions in a single system. It will help authorized users efficiently manage company profiles, contacts, visits, recruitment activities, and engagement history.
+Project Vision
+The Company Engagement Portal aims to provide a centralized and organized platform for managing institutional interactions with companies and industry organizations. It will simplify the management of company information, recruitment activities, visits, contacts, and engagement history.
+Problem Statement
+Institutions need to manage interactions with recruiting companies and industry organizations, including company profiles, contacts, visits, recruitment activities, and engagement history. Managing this information through scattered or manual records can make it difficult to track interactions and maintain up-to-date information. Therefore, a centralized Company Engagement Portal is needed to organize and efficiently manage these activities.
+Project Objectives
+The initial objectives should be:
+To maintain centralized profiles of recruiting companies and industry organizations.
+To manage and update company contact details.
+To record and track company visits to the institution.
+To manage recruitment-related activities and their details.
+To maintain the history of institutional engagement with companies.
+To provide easy access to company-related information for authorized users.
+To improve the organization and tracking of company interactions.
+To reduce dependency on scattered or manual records.
+Stakeholders
+Stakeholder
+Interest / Role
+Training & Placement Cell
+Manage company profiles, recruitment activities, visits, and engagement records.
+Company Representatives
+Provide company information and participate in recruitment and engagement activities.
+Faculty/Institute Authorities
+Monitor and support institutional interactions with companies.
+Students
+Benefit from company recruitment activities and placement opportunities.
+System Administrator
+Manage users, access control, and overall system operations.
+Development Team
+Design, develop, test, and maintain the Company Engagement Portal.
+Initial Scope
+Company profile and contact management.
+Recording company visits and recruitment activities.
+Maintaining company engagement and interaction history.
+Searching and viewing company-related information.
+Role-based access for authorized users.
+Initially Out of Scope
+Payment processing
+Complete ERP or academic management
+Advanced AI-based company recommendations
+Integration with external hiring systems
+Automated recruitment decision-making
+Initial Assumptions
+Users will have access to the internet
+Authorized users will have valid login credentials
+Company information will be provided by authorized users
+Company visits and recruitment activities will be recorded by authorized users
+The system will initially be developed as a web application
+The system will use a centralized database for storing company and engagement information
+Initial Constraints
+Limited development time
+Limited team size and resources
+Limited access to real company data
+Limited infrastructure during development
+Limited testing with real users
+Requirement changes during development
+Need to protect company and user information
+Limited integration with external company systems
+Initial Success Criteria
+Different user roles can access the appropriate system features
+Authorized users can create and manage company profiles
+Company contact details can be added and updated
+Company visits and recruitment activities can be recorded
+Company engagement history can be viewed and tracked
+Users can search and access relevant company information
+Important system functions are tested successfully
+Major defects are identified and resolved
+The project is maintained in a controlled GitHub repository
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314 Lab Assignment 2: Solution
+User Classes
+Training & Placement (T&P) Coordinator
+The T&P Coordinator is the primary operator of the system, responsible for maintaining company-related information.
+They shall be able to:
+authenticate;
+create and manage company profiles;
+add and update company contacts;
+record and view company visits;
+create, edit and submit recruitment activities for approval;
+view engagement history;
+access reports.
+Company Representative
+Company representatives are the external point of contact for a company and provide information used by the institution.
+They shall be able to:
+share company and contact information with the T&P Coordinator (offline/through the Coordinator, not direct system login in the initial version);
+participate in recorded visits and recruitment activities.
+Approving Authority (Faculty/Institute Authority)
+The approving authority reviews recruitment activities submitted by coordinators. The approver shall be able to:
+review submitted recruitment activities;
+approve recruitment activities;
+reject recruitment activities;
+provide comments/reasons;
+view approval history.
+Administrator
+The administrator shall:
+manage users;
+assign roles;
+manage system-level configuration;
+monitor system activity;
+access administrative reports.
+Institute Management
+Management users shall have access to appropriate aggregated reports and dashboards for monitoring company engagement and recruitment activity across the institution.
+System Context
+Functional Requirements
+Authentication and Account Management
+FR-001 — User Login: The system shall allow a registered user to authenticate using valid credentials.
+FR-002 — Authentication Failure: The system shall notify the user when authentication fails without unnecessarily revealing sensitive authentication information.
+FR-003 — Logout: The system shall allow authenticated users to terminate their session.
+FR-004 — Role Assignment: The system shall allow authorized administrators to assign roles to users.
+FR-005 — Role-Based Access: The system shall restrict system functions according to the user's assigned role.
+Company Profile Management
+FR-006 — Create Company Profile: The system shall allow an authorized coordinator to create a company profile.
+FR-007 — Company Profile Information: The system shall allow a coordinator to specify: company name; industry/sector; address; website; primary contact; status; notes.
+FR-008 — Edit Company Profile: The system shall allow an authorized coordinator to modify an existing company profile.
+FR-009 — Deactivate Company Profile: The system shall allow an authorized coordinator to deactivate/archive a company profile.
+FR-010 — View Company Profile: The system shall allow authorized users to view complete company profile details.
+Company Contact Management
+FR-011 — Add Company Contact: The system shall allow an authorized coordinator to add a contact person for a company.
+FR-012 — Contact Information: The system shall allow a coordinator to specify: name; designation; email; phone; department.
+FR-013 — Edit Company Contact: The system shall allow an authorized coordinator to update contact details.
+FR-014 — Remove Company Contact: The system shall allow an authorized coordinator to remove an outdated contact.
+FR-015 — View Company Contacts: The system shall allow authorized users to view all contacts associated with a company.
+Company Visit Management
+FR-016 — Record Company Visit: The system shall allow an authorized coordinator to record a company visit.
+FR-017 — Visit Information: The system shall allow a coordinator to specify: visit date; purpose; attendees; outcome; notes.
+FR-018 — Edit Visit Record: The system shall allow an authorized coordinator to modify a visit record.
+FR-019 — View Visit History: The system shall allow authorized users to view the visit history of a company.
+Recruitment Activity Management
+FR-020 — Create Recruitment Activity: The system shall allow an authorized coordinator to create a recruitment activity.
+FR-021 — Recruitment Activity Information: The system shall allow a coordinator to specify: title; company; type; date; eligibility criteria; positions offered; status.
+FR-022 — Save Draft: The system shall allow an incomplete recruitment activity to be saved as a draft.
+FR-023 — Edit Recruitment Activity: The system shall allow an authorized coordinator to modify a recruitment activity subject to its current status.
+FR-024 — Submit for Approval: The system shall allow a coordinator to submit a recruitment activity for approval.
+FR-025 — Approve Recruitment Activity: The system shall allow an authorized approver to approve a recruitment activity.
+FR-026 — Reject Recruitment Activity: The system shall allow an authorized approver to reject a recruitment activity.
+FR-027 — Rejection Reason: The system shall allow an approver to provide a reason when rejecting a recruitment activity.
+FR-028 — Publish Recruitment Activity: The system shall mark an approved recruitment activity as published according to defined rules.
+FR-029 — Cancel Recruitment Activity: The system shall allow an authorized user to cancel a recruitment activity.
+Engagement History
+FR-030 — Log Engagement Record: The system shall automatically log an engagement record whenever a visit, contact update, or recruitment activity occurs.
+FR-031 — View Engagement History: The system shall allow authorized users to view the complete engagement history of a company.
+FR-032 — Engagement Timeline: The system shall present engagement history in chronological order.
+Search and Access
+FR-033 — Company Search: The system shall allow authorized users to search for companies.
+FR-034 — Company Filtering: The system shall allow authorized users to filter companies by relevant attributes (industry, status, etc.).
+FR-035 — View Company Details: The system shall display complete relevant information for a selected company.
+Reporting
+FR-036 — Engagement Report: The system shall generate company engagement reports for authorized users.
+FR-037 — Recruitment Activity Report: The system shall generate recruitment activity summaries.
+FR-038 — Visit Report: The system shall generate company visit reports.
+FR-039 — Administrative Dashboard: The system shall provide appropriate summary information to authorized administrators.
+Business Rules
+ID
+BUSINESS RULE
+BR-001
+Only authorized coordinators/administrators can create company profiles.
+BR-002
+A recruitment activity must be approved before it is published.
+BR-003
+Only approved recruitment activities can be scheduled/executed.
+BR-004
+A company profile cannot be duplicated for the same company.
+BR-005
+Only authorized users can record company visits.
+BR-006
+Only authorized users can access administrative reports.
+BR-007
+Cancelled recruitment activities cannot be further edited.
+BR-008
+Engagement history entries cannot be deleted, only archived.
+BR-009
+Each company contact must be linked to an existing company profile.
+BR-010
+Every approval decision must record the approver's identity and decision date
+Non-Functional Requirements
+Performance
+NFR-001: The system should provide acceptable response times for normal user operations.
+NFR-002: Search and filtering operations should return results within an acceptable time under expected load.
+NFR-003: The system should support concurrent users appropriate to expected institutional usage.
+Security
+NFR-004: Protected functionality shall require authentication.
+NFR-005: Access to functionality shall be controlled by user roles.
+NFR-006: Sensitive company/contact information shall not be exposed to unauthorized users.
+NFR-007: Administrative operations should be auditable.
+Usability
+NFR-008: The interface shall use consistent navigation.
+NFR-009: Error messages shall be understandable to users.
+NFR-010: Common activities such as recording a visit or searching a company should require minimal unnecessary interaction.
+Reliability
+NFR-011: Company and contact records shall be maintained reliably.
+NFR-012: Visit and recruitment activity records shall not be lost during normal system operation.
+Availability
+NFR-013: The system should be available during normal institutional operating periods, except during planned maintenance.
+Maintainability
+NFR-014: The software shall follow a modular architecture.
+NFR-015: Source code shall be maintained using version control.
+NFR-016: Software documentation shall be maintained alongside relevant system changes.
+Scalability
+NFR-017: The architecture should allow the system to support an increasing number of companies, contacts and engagement records.
+Compatibility
+NFR-018: The system should operate correctly on commonly used modern web browsers.
+Privacy
+NFR-019: Company and contact information shall be accessible only to authorized users.
+Auditability
+NFR-020: Significant administrative actions should be recorded to support accountability and troubleshooting.
+Data Requirements
+The initial logical information requirements include the following entities.
+User
+Possible attributes:
+User ID
+Name
+Email
+Contact information
+Role
+Account status
+Company
+Possible attributes:
+Company ID
+Name
+Industry
+Address
+Website
+Status
+Notes
+Contact
+Possible attributes:
+Contact ID
+Company ID
+Name
+Designation
+Email
+Phone
+Department
+Visit
+Possible attributes:
+Visit ID
+Company ID
+Date
+Purpose
+Attendees
+Outcome
+Notes
+Recruitment Activity
+Possible attributes:
+Activity ID
+Company ID
+Title
+Type
+Date
+Eligibility criteria
+Positions offered
+Status
+Engagement History
+Possible attributes:
+Record ID
+Company ID
+Type (visit/contact/activity)
+Description
+Date
+Recorded by
+Approval
+Possible attributes:
+Approval ID
+Activity ID
+Approver
+Decision
+Comments
+Decision date
+Recruitment Activity Lifecycle
+The recruitment activity entity may pass through the following states:
+Draft
+↓
+Submitted
+↓
+Under Review
+↓
+┌───────┴───────┐
+↓↓
+ApprovedRejected
+↓↓
+ScheduledRevision
+↓↓
+OngoingResubmission
+↓
+Completed
+↓
+Engagement History
+Major Use Cases
+ID
+Use Case
+Primary Actor
+UC-001
+Login
+All users
+UC-002
+Manage Users
+Administrator
+UC-003
+Create Company Profile
+Coordinator
+UC-004
+Edit Company Profile
+Coordinator
+UC-005
+Add Company Contact
+Coordinator
+UC-006
+Record Company Visit
+Coordinator
+UC-007
+Create Recruitment
+Activity
+Coordinator
+UC-008
+Submit Recruitment
+Activity
+Coordinator
+UC-009
+Approve Recruitment
+Activity
+Approver
+UC-010
+Reject Recruitment Activity
+Approver
+UC-011
+Publish Recruitment Activity
+System/Coordinator
+UC-012
+Cancel Recruitment Activity
+Coordinator
+UC-013
+Search Companies
+Authorized User
+UC-014
+View Engagement History
+Authorized User
+UC-015
+Generate Reports
+Authorized User
+Detailed Use Case Example
+UC-006 — Record Company Visit Primary Actor: T&P Coordinator Preconditions:
+Coordinator is authenticated.
+Company profile exists. Main Flow:
+Coordinator selects a company.
+System displays company details.
+Coordinator selects "Record Visit."
+Coordinator enters visit date, purpose, attendees and outcome.
+System validates the entered information.
+System creates the visit record.
+System updates the engagement history.
+System displays confirmation. Alternative Flows:
+If the company does not exist → coordinator is prompted to create the profile first.
+If mandatory fields are missing → system displays a validation error.
+Postcondition: A valid visit record exists and is linked to the company's engagement history.
+User Stories
+The requirements will also be represented in Agile form.
+US-001: As a coordinator, I want to log in so that I can securely access the Company Engagement Portal.
+US-002: As a coordinator, I want to create a company profile so that the institution has a record of the company.
+US-003: As a coordinator, I want to add company contacts so that I can reach the right person when needed.
+US-004: As a coordinator, I want to record a company visit so that the interaction is documented.
+US-005: As a coordinator, I want to create a recruitment activity so that it can be reviewed for approval.
+US-006: As an approver, I want to approve or reject recruitment activities so that only valid activities proceed.
+US-007: As a coordinator, I want to view a company's engagement history so that I understand past interactions.
+US-008: As an administrator, I want to manage user roles so that access to the system is controlled.
+US-009: As institute management, I want to view engagement reports so that I can monitor company relationships.
+US-010: As a coordinator, I want to search for companies so that I can quickly find relevant information.
+Acceptance Criteria Example US-004 — Record Company Visit
+ID
+Acceptance Criterion
+AC-01
+Coordinator must be authenticated
+AC-02
+Company profile must exist
+AC-03
+Mandatory visit fields must be provided
+AC-04
+A successful save must create a visit record
+AC-05
+Engagement history must be updated
+AC-06
+Coordinator must receive confirmation
+Requirements Prioritization Must Have
+Authentication
+Role-based access
+Company profile management
+Contact management
+Visit recording
+Recruitment activity creation and approval
+Company search
+Should Have
+Engagement history timeline
+Draft saving
+Reports
+Could Have
+Advanced dashboards
+Advanced analytics
+Won't Have in Initial Release
+Payment processing
+Complete ERP/academic management
+Advanced AI-based company recommendations
+Integration with external hiring systems
+Automated recruitment decision-making
+Requirements Traceability
+Requirements Traceability Matrix (RTM). An initial version:
+Requirement
+User Story
+Use Case
+Test
+FR-006
+US-002
+UC-003
+TBD
+FR-016
+US-004
+UC-006
+TBD
+FR-024
+US-005
+UC-008
+TBD
+FR-025
+US-006
+UC-009
+TBD
+FR-036
+US-009
+UC-015
+TBD
+Note: The TBD entries will be filled later in the testing phase.
+Requirements Validation
+Correctness — Does it represent a genuine stakeholder need?
+Unambiguity — Can it have only one reasonable interpretation?
+Completeness — Does it contain sufficient information?
+Consistency — Does it conflict with another requirement?
+Verifiability — Can we test whether it has been satisfied?
+Feasibility — Can it realistically be implemented?
+Traceability — Can we identify its origin and follow it through development?
+Prioritization — Do we know how important it is?
+Modifiability — Can it be changed without unnecessarily affecting the entire SRS?
+Example of Requirement Quality Poor
+"The system should be fast and user-friendly." This is ambiguous and difficult to verify.
+Better
+"The system shall provide consistent navigation across major user interfaces." and
+"The system should provide acceptable response times for company search under expected workload."
+Requirement Change Management
+Because the Company Engagement Portal uses Agile development, requirements can change. For example:
+Change Request: Add a company feedback/rating feature after each recruitment activity. The team should follow: Change Request → Impact Analysis → Requirement Update →
+Backlog Update → Prioritization → Sprint Planning → Design Change → Implementation → Testing → Release
+The change should also update relevant documentation and traceability.
+Future Requirements
+Potential future requirements include:
+integration with external hiring systems;
+automated recruitment decision-making;
+advanced AI-based company recommendations;
+mobile application;
+advanced analytics;
+integration with institutional authentication;
+integration with institutional ERP;
+automated engagement summary generation.
+SRS Baseline and Versioning
+Initial baseline: SRS v1.0
+Version Control Information:
+SRS v1.0 defines the initial baseline requirements for the Company Engagement Portal, covering user roles, system context, functional and non-functional requirements, data requirements, major use cases, and acceptance criteria.
+This version also establishes the initial scope, business rules, recruitment activity lifecycle, requirements traceability, and change management process for the project. Future requirement changes will be managed through impact analysis, requirement updates, prioritization, implementation, testing, and controlled versioning.
+Individual Contribution
+Hitesh Jain — Prepared user classes and functional requirements. Anand Patidar — Prepared use cases and user stories.
+Pranav Vashisth — Prepared system context and requirements traceability.
+Avesh Khan — Prepared non-functional requirements and requirements validation.
+AI USAGE POLICY – STUDENT DECLARATION
+AI tools may be used as supporting tools for this assignment. The team is responsible for the correctness, consistency and understanding of all submitted requirements.
+We have disclosed the use of AI tools, if any.
+AI-generated suggestions have been reviewed, verified and adapted by the team.
+We understand and can explain the submitted requirements, use cases and user stories.
+We have verified that the requirements are consistent with our project's scope.
+The final SRS represents our team's understanding and decisions.
+AI Tool(s) Used: ChatGPT, Claude Code
+Purpose of AI Use:
+AI was used as a supporting tool for reviewing and organizing the Software Requirements Specification (SRS), drafting the System Context section and context-level diagram description, and improving the clarity and consistency of the documented requirements.
+Team ID: T066
+Team Representative: Pranav Vashish
+Date: 07/09/2026
+The LNM Institute of Information Technology, Jaipur
+Software Development Laboratory Course Code: CS314
+Lab Assignment 3: Solution
+Scenario, Use Case and Activity Modelling
+Project: Company Engagement Portal Team ID: T066
+Team Members: Hitesh Jain, Anand Patidar, Pranav Vashisth, Avesh Khan
+Purpose: This assignment extends the requirements specification from Assignment 2 into scenarios and UML models, while keeping the existing scope and terminology unchanged.
+Scenarios
+The following three use cases are carried forward from the Assignment 2 use-case catalogue for detailed modelling: UC-006 Record Company Visit, UC-008 Submit Recruitment Activity, and UC-009 Approve Recruitment Activity.
+UC-006 — Record Company Visit
+Actor(s) involved
+T&P Coordinator.
+Starting condition
+The coordinator is authenticated and the company profile exists.
+Main sequence
+Coordinator selects a company.
+System displays company details.
+Coordinator selects “Record Visit.”
+Coordinator enters visit date, purpose, attendees and outcome.
+System validates the entered information.
+System creates the visit record.
+System updates the engagement history.
+System displays confirmation.
+Alternative / exception
+If the company does not exist, the coordinator is prompted to create the profile first. If mandatory fields are missing, the system displays a validation error.
+Expected outcome
+A valid visit record exists and is linked to the company’s engagement history.
+UC-008 — Submit Recruitment Activity
+Actor(s) involved
+T&P Coordinator.
+Starting condition
+The coordinator is authenticated and a recruitment activity exists in a status that permits submission (normally a draft).
+Main sequence
+Coordinator selects the recruitment activity draft.
+System displays the activity details.
+Coordinator reviews the recruitment activity details.
+Coordinator selects “Submit for Approval.”
+System validates the required information and current status.
+System marks the activity as Submitted.
+The submitted activity becomes available for the approval process.
+Alternative / exception
+If required information is incomplete or the activity status does not permit submission, the system displays a validation error and the coordinator corrects/edits the activity before retrying.
+Expected outcome
+The recruitment activity is in Submitted status and is ready for review by the Approving Authority.
+19
+The LNM Institute of Information Technology, Jaipur
+Software Development Laboratory Course Code: CS314
+UC-009 — Approve Recruitment Activity
+Actor(s) involved
+Approving Authority (Faculty/Institute Authority).
+Starting condition
+The approver is authenticated and a recruitment activity has been submitted for approval / is under review.
+Main sequence
+Approver opens the submitted recruitment activity.
+System displays the activity details.
+Approver reviews the recruitment activity.
+Approver makes an approval decision.
+System records the approval decision, approver identity and decision date.
+System sets the recruitment activity status to Approved.
+Alternative / exception
+If the approver does not approve the activity, the alternative rejection flow is handled through UC-010 Reject Recruitment Activity, where the approver can provide comments/reasons.
+Expected outcome
+The recruitment activity is approved and can proceed to the next lifecycle state according to the Assignment 2 recruitment activity lifecycle.
+20
+The LNM Institute of Information Technology, Jaipur
+Software Development Laboratory Course Code: CS314
+Use Case Diagram
+The complete system use-case model is shown below. The three detailed Assignment 3 use cases are highlighted with double borders and the label [DETAILED].
+Relationship note: No new functionality is introduced. No &lt;&lt;include&gt;&gt;, &lt;&lt;extend&gt;&gt;, or actor-generalization relationship is asserted because Assignment 2 does not establish a mandatory reusable subflow or actor inheritance hierarchy for these use cases.
+21
+The LNM Institute of Information Technology, Jaipur
+Software Development Laboratory Course Code: CS314
+Activity Diagram — UC-006 Record Company Visit
+The workflow follows the Assignment 2 main flow and its two stated alternatives: a missing company profile and missing mandatory fields.
+22
+The LNM Institute of Information Technology, Jaipur
+Software Development Laboratory Course Code: CS314
+Activity Diagram — UC-008 Submit Recruitment Activity
+The workflow models submission validation and the alternative path when required information or the current status prevents submission.
+23
+The LNM Institute of Information Technology, Jaipur
+Software Development Laboratory Course Code: CS314
+Activity Diagram — UC-009 Approve Recruitment Activity
+The workflow records the approval decision, approver identity and decision date. The non-approval branch proceeds to the existing UC-010 rejection use case.
+24
+The LNM Institute of Information Technology, Jaipur
+Software Development Laboratory Course Code: CS314
+Consistency and Traceability
+UC-006 remains consistent with FR-016 to FR-019, the Record Company Visit user story/acceptance criteria, and the Engagement History requirements from Assignment 2.
+UC-008 remains consistent with FR-020 to FR-024 and the recruitment activity lifecycle Draft → Submitted → Under Review.
+UC-009 remains consistent with FR-025 to FR-027 and Business Rule BR-010, which requires the approver identity and decision date to be recorded.
+No new project functionality, scope item, or requirement is introduced. The models only represent workflows already specified in Assignment 2.
+GitHub Submission Structure
+docs/uml/assignment-3/
+Scenarios.md
+Use-Case-Model.md
+diagrams/Use-Case-Diagram.png
+diagrams/Activity-Diagram-UC01.png
+diagrams/Activity-Diagram-UC02.png
+diagrams/Activity-Diagram-UC03.png
+Individual Contribution
+Team Member
+Contribution
+Hitesh Jain
+Prepared and reviewed the three scenario descriptions for consistency with Assignment 2.
+Anand Patidar
+Prepared the complete-system Use Case Diagram and verified actor/use-case associations.
+Pranav Vashisth
+Prepared Activity Diagrams for UC-006 and UC-008 and checked requirements traceability.
+Avesh Khan
+Prepared the Activity Diagram for UC-009 and performed consistency/documentation review.
+AI USAGE POLICY – STUDENT DECLARATION
+We have disclosed the use of AI tools, if any.
+AI-generated suggestions have been reviewed, verified and adapted by the team.
+We understand and can explain the submitted scenarios, use case diagram and activity diagrams.
+We have verified that the UML models are consistent with our project's requirements, use cases and scope.
+The final submission represents our team's understanding and modelling decisions.
+AI Tool(s) Used
+ChatGPT
+Purpose of AI Use
+AI was used as a supporting tool for drafting scenario wording, structuring UML model layouts and checking consistency against the Assignment 2 requirements. The team is responsible for reviewing and adapting the final submission.
+Team ID
+T066
+Team Representative
+Pranav Vashisth
+Date
+13/09/2026
+25
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314 Lab Assignment 4: Solution
+Project: Company Engagement PortalTeam ID: T066
+Classes
+The following classes extend the requirements and the three detailed use cases carried forward from Assignment 3: UC-006 Record Company Visit, UC-008 Submit Recruitment Activity, and UC-009 Approve Recruitment Activity. The model keeps the terminology and scope of the Company Engagement Portal unchanged. Classes are selected to represent the principal domain entities, role specializations and responsibilities needed to realize the three workflows.
+Class Identification
+Class
+Important Attributes
+Important Operations / Responsibilities
+Traceability
+User
+userId, name, email, role, accountStatus
+authenticate(), logout(), hasRole()
+All three; authentication precondition
+TPCoordinator
+employeeId
+createCompanyProfile(), recordVisit(), createRecruitmentActivity(), submitForApproval()
+UC-006, UC-008
+ApprovingAuthority
+authorityId
+reviewActivity(), approveActivity(), rejectActivity()
+UC-009
+Company
+companyId, name, industry, address, website, status
+viewProfile(), updateProfile(), addContact()
+UC-006; existing company precondition
+Contact
+contactId, name, designation, email, phone, department
+updateDetails()
+UC-006;
+company/contact data
+Visit
+visitId, date, purpose, attendees, outcome, notes
+validate(), save(), update()
+UC-006
+RecruitmentActivity
+activityId, title, type, date, eligibilityCriteria, positionsOffered, status
+saveDraft(), validateSubmission(), submit(), changeStatus()
+UC-008, UC-009
+Approval
+approvalId, decision, comments, decisionDate
+recordDecision(), isApproved()
+UC-009
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Supporting Classes
+Class
+Important Attributes
+Important Operations / Responsibilities
+Traceability
+EngagementHistory
+companyId
+addRecord(), getTimeline()
+UC-006; FR-030 to FR-032
+EngagementRecord
+recordId, type, description, date, recordedBy
+create(), archive()
+UC-006; visit creates record
+CompanyService
+—
+createProfile(), updateProfile(), findCompany()
+Supports company lookup in UC-006
+VisitService
+—
+recordVisit(), validateVisit(), updateVisit()
+Supports UC-006
+RecruitmentActivityService
+—
+createActivity(), validateSubmission(), submitActivity()
+Supports UC-008
+ApprovalService
+—
+reviewActivity(), approve(), reject()
+Supports UC-009
+EngagementHistoryService
+—
+logVisit(), viewHistory(), appendRecord()
+Supports UC-006
+ValidationService
+—
+validateRequiredFields(), validateStatus(), validateCompanyExists()
+Validation steps in UC-006/UC-008
+Class-Modeling Notes
+The role classes TPCoordinator and ApprovingAuthority specialize User because the requirements distinguish their responsibilities and permissions.
+Company, Contact, Visit, RecruitmentActivity, Approval, EngagementHistory and EngagementRecord are domain classes grounded directly in the Assignment 2 data requirements and business rules.
+The service classes represent system responsibilities needed to validate, create, submit, approve and log the actions already described in the three Assignment 3 workflows; they do not introduce new functionality.
+The classes are deliberately limited to responsibilities required by the selected use cases and their stated preconditions, main flows, alternatives and postconditions.
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Object Diagram
+Snapshot Scenario — UC-006 Record Company Visit
+The object diagram represents the system immediately after a T&P; Coordinator has recorded a valid visit for an existing company. The coordinator object is associated with the selected company and the newly created Visit instance. The visit is linked to the company's EngagementHistory through a newly created EngagementRecord. A company contact is also shown to represent the existing contact information associated with the company at this point in the scenario.
+The object instances shown above are all instances of classes identified in Section 38: coordinator01 : TPCoordinator, company104 : Company, contact11 : Contact, visit14 : Visit, history104 : EngagementHistory, and record219 : EngagementRecord. The representative values correspond to a meaningful runtime snapshot rather than additional requirements.
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Relationships
+The relationships below are derived from the requirements, data requirements, business rules and the three detailed Assignment 3 scenarios. Multiplicities express the expected number of related instances; aggregation/composition is used only where the model indicates a meaningful whole-part relationship.
+Relationship
+Type / Multiplicity
+Justification
+User — TPCoordinator
+Generalization
+A coordinator is a role-specific User and inherits authentication/account responsibilities.
+User — ApprovingAuthority
+Generalization
+An approving authority is a role-specific User and must authenticate before UC-009.
+Company — Contact
+Association: 1 to 0..*
+BR-009 requires every contact to be linked to an existing company; a company may have multiple contacts.
+Company — Visit
+Association: 1 to 0..*
+FR-016 to FR-019 record and retrieve visit history for a company.
+Company — RecruitmentActivity
+Association: 1 to 0..*
+FR-020/FR-021 associate a recruitment activity with a company.
+Company — EngagementHistory
+Association: 1 to 1
+Engagement history is maintained for a company and records its institutional interactions.
+EngagementHistory — EngagementRecord
+Composition: 1 to 0..*
+A history is made up of its engagement records; FR-030 logs a record when a visit occurs.
+RecruitmentActivity — Approval
+Composition: 1 to 0..*
+Approval decisions belong to the recruitment activity and support approval history.
+ApprovingAuthority — Approval
+Association: 1 to 0..*
+BR-010 requires each approval decision to record the approver identity and decision date.
+TPCoordinator — Visit
+Association: 1 to 0..*
+UC-006 explicitly assigns the coordinator to record visits.
+TPCoordinator — RecruitmentActivity
+Association: 1 to 0..*
+UC-008 uses the coordinator to select and submit a recruitment activity.
+Service classes  domain classes
+Dependency
+Services invoke the responsibilities of domain objects for lookup, validation, visit recording, submission, approval and engagement logging.
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+UML Class Diagram
+The following UML 1.x class diagram consolidates the classes and relationships identified above. Generalization is shown with hollow-triangle arrows, aggregation/composition with diamonds, associations with solid lines and multiplicities, and dependencies with dashed arrows.
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Consistency and Traceability
+The model maintains the required chain: Assignment 2 Requirements  3 Use Cases  Assignment 3 Activities  Classes  Objects  Relationships.
+Use-Case to Class Traceability
+Assignment 3 Use Case
+Relevant classes
+Consistency evidence
+UC-006 Record Company Visit
+TPCoordinator, Company, Contact, Visit, EngagementHistory, EngagementRecord, VisitService, ValidationService, EngagementHistoryService
+The scenario selects an existing company, records visit data, validates it, creates the Visit and updates engagement history. These responsibilities are represented without changing the flow.
+UC-008 Submit Recruitment Activity
+TPCoordinator, RecruitmentActivity, Company, RecruitmentActivityService, ValidationService
+The scenario selects a draft activity, reviews details, validates required information/status, and changes the activity to Submitted.
+UC-009 Approve Recruitment Activity
+ApprovingAuthority, RecruitmentActivity, Approval, ApprovalService, ValidationService
+The scenario opens a submitted activity, reviews it, records the decision and approver/date, and sets the activity to Approved; rejection remains the existing UC-010 alternative.
+Consistency Checks
+The three detailed use cases remain exactly the Assignment 3 use cases: UC-006, UC-008 and UC-009.
+UC-006 remains aligned with FR-016 to FR-019 and the stated postcondition that a valid visit record is linked to the company's engagement history.
+UC-008 remains aligned with FR-020 to FR-024 and the lifecycle transition Draft  Submitted  Under Review.
+UC-009 remains aligned with FR-025 to FR-027 and BR-010, which requires the approver identity and decision date to be recorded.
+The object diagram contains only instances of classes present in the class model, satisfying the consistency requirement.
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+GitHub Submission Structure
+The completed Assignment 4 artifacts should be committed under the following structure specified in the assignment instructions:
+docs/uml/assignment-04/
+■■■ Classes.md
+■■■ Relationships.md
+■■■ Object-Model.md
+■■■ diagrams/
+ ■■■ Class-Diagram.png
+ ■■■ Object-Diagram.png
+Individual Contribution
+Team Member
+Contribution
+Hitesh Jain
+Prepared and reviewed class identification and verified that the selected classes remain consistent with the Company Engagement Portal requirements.
+Anand Patidar
+Prepared and reviewed the UML Class Diagram and checked class relationships and multiplicities.
+Pranav Vashisth
+Prepared the Object Diagram for UC-006 and verified the requirements-to-use-case-to-class-to-object traceability.
+Avesh Khan
+Prepared and reviewed the Relationships section and performed final consistency/documentation review.
+AI USAGE POLICY – STUDENT DECLARATION
+We have disclosed the use of AI tools, if any.
+AI-generated suggestions have been reviewed, verified and adapted by the team.
+We understand and can explain the submitted classes, object diagram and relationships.
+We have verified that the UML models are consistent with our project's requirements, use cases and scope.
+The final submission represents our team's understanding and modeling decisions.
+AI Tool(s) Used: ChatGPT
+Purpose of AI Use: AI was used as a supporting tool for drafting class/relationship descriptions, structuring UML model layouts and checking consistency against the Assignment 2 and Assignment 3 material. The team is responsible for reviewing and adapting the final submission.
+Team ID: T066
+Team Representative: Pranav Vashisth
+Date: 19/09/2026
+Expected Outcome: The resulting model demonstrates consistency between the requirements, the threedetailed use cases, their Assignment 3 activity models, the identified classes, a concrete object snapshot, andExpected Outcome: The resulting model demonstrates consistency between the requirements, the threedetailed use cases, their Assignment 3 activity models, the identified classes, a concrete object snapshot, andExpected Outcome: The model demonstrates consistency between the requirements, the three detailed
+Expected Outcome: The resulting model demonstrates consistency between the requirements, the three
+detailed use cases, their Assignment 3 activity models, the identified classes, a concrete object snapshot, and
+Expected Outcome: The resulting model demonstrates consistency between the requirements, the three
+detailed use cases, their Assignment 3 activity models, the identified classes, a concrete object snapshot, and
+use cases, Assignment 3 activity models, identified classes, a concrete object snapshot, and class relationships.
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Objective: Extend the structural models from Assignment 4 by modelling object interactions, object states and major software components. The same three detailed use cases are used throughout this assignment: UC-006 Record Company Visit, UC-008 Submit Recruitment Activity, and UC-009 Approve Recruitment Activity.
+42. Collaboration Modelling
+The collaboration models extend the three detailed use cases carried forward from Assignment 2 and Assignment 3. The participating objects and their responsibilities are based on the classes and relationships identified in Assignment 4.
+42.1 Collaboration Diagram — UC-006 Record Company Visit
+Purpose: This diagram represents the interaction between the T&P Coordinator and the objects responsible for selecting a company, validating visit information, creating the visit record, and updating engagement history.
+Participating Objects:
+coordinator01 : TPCoordinator
+companyService : CompanyService
+company104 : Company
+visitService : VisitService
+validationService : ValidationService
+visit14 : Visit
+engagementHistoryService : EngagementHistoryService
+history104 : EngagementHistory
+record219 : EngagementRecord
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+     
+ Message Sequence
+Message
+From
+To
+Message
+1
+TPCoordinator
+CompanyService
+selectCompany(companyId)
+1.1
+CompanyService
+Company
+findCompany(companyId)
+1.2
+Company
+TPCoordinator
+viewProfile()
+2
+TPCoordinator
+VisitService
+recordVisit(visitData)
+2.1
+VisitService
+ValidationService
+validateCompanyExists()
+2.2
+VisitService
+ValidationService
+validateRequiredFields()
+2.3
+VisitService
+Visit
+validate()
+2.4
+VisitService
+Visit
+save()
+2.5
+VisitService
+EngagementHistoryService
+appendRecord()
+2.6
+EngagementHistoryService
+EngagementHistory
+createRecord()
+Responsibility: The TPCoordinator initiates the operation. CompanyService handles company lookup, VisitService coordinates the visit recording process, ValidationService performs validation, Visit represents the visit record, and EngagementHistoryService updates the company's engagement history.
+42.2 Collaboration Diagram — UC-008 Submit Recruitment Activity
+Purpose: This diagram represents how the T&P Coordinator submits an existing recruitment activity draft for approval.
+Participating Objects:
+coordinator01 : TPCoordinator
+recruitmentActivityService : RecruitmentActivityService
+activity15 : RecruitmentActivity
+validationService : ValidationService
+company104 : Company
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Message Sequence
+Message
+From
+To
+Message
+1
+TPCoordinator
+RecruitmentActivityService
+selectActivity(activityId)
+1.1
+RecruitmentActivityService
+RecruitmentActivity
+get/display activity()
+1.2
+RecruitmentActivity
+TPCoordinator
+displayDetails()
+2
+TPCoordinator
+RecruitmentActivity
+reviewActivity()
+3
+TPCoordinator
+RecruitmentActivityService
+submitForApproval()
+3.1
+RecruitmentActivityService
+ValidationService
+validateRequiredFields()
+3.2
+RecruitmentActivityService
+ValidationService
+validateStatus()
+3.3
+ValidationService
+RecruitmentActivityService
+validationResult()
+4
+RecruitmentActivityService
+RecruitmentActivity
+submit()
+5
+RecruitmentActivityService
+RecruitmentActivity
+changeStatus('Submitted')
+Responsibility: TPCoordinator selects and reviews the recruitment activity. RecruitmentActivityService coordinates submission, ValidationService verifies required information and status, and RecruitmentActivity changes to the Submitted state after successful validation.
+42.3 Collaboration Diagram — UC-009 Approve Recruitment Activity
+Purpose: This diagram represents the interaction between the Approving Authority and the objects involved in reviewing and approving a submitted recruitment activity.
+Participating Objects:
+approver01 : ApprovingAuthority
+approvalService : ApprovalService
+activity15 : RecruitmentActivity
+approval21 : Approval
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Message Sequence
+Message
+From
+To
+Message
+1
+ApprovingAuthority
+ApprovalService
+reviewActivity(activityId)
+1.1
+ApprovalService
+RecruitmentActivity
+getActivity()
+1.2
+RecruitmentActivity
+ApprovingAuthority
+displayDetails()
+2
+ApprovingAuthority
+ApprovalService
+makeApprovalDecision()
+3
+ApprovalService
+Approval
+recordDecision()
+3.1
+Approval
+ApprovalService
+recordDecision()
+4
+ApprovalService
+RecruitmentActivity
+changeStatus('Approved')
+4R
+ApprovalService
+UC-010
+rejectActivity()
+Responsibility: ApprovingAuthority reviews the submitted activity and makes the approval decision. ApprovalService coordinates the process, while Approval records the decision. If approved, RecruitmentActivity changes to Approved; otherwise the existing UC-010 rejection flow is followed.
+43. State Modelling
+Two important objects whose states change during the selected use cases are RecruitmentActivity and Visit. The RecruitmentActivity lifecycle follows the lifecycle already established in the requirements and Assignment 2.
+43.1 State Diagram — RecruitmentActivity
+State
+Description
+Draft
+Recruitment activity is being created or edited.
+Submitted
+Coordinator has successfully submitted the activity for approval.
+Under Review
+Activity is being reviewed by the Approving Authority.
+Approved
+Activity has been approved.
+Rejected
+Activity has been rejected.
+Revision
+Rejected activity requires modification.
+Resubmission
+Revised activity is submitted again.
+Scheduled
+Approved activity is scheduled.
+Ongoing
+Recruitment activity is currently being conducted.
+Completed
+Recruitment activity has finished.
+Engagement History
+Activity has contributed to the company's engagement history.
+Events and guards: submitForApproval() moves Draft to Submitted; review() moves Submitted to Under Review; [approved] moves to Approved; [rejected] moves to Rejected; revise() moves to Revision; resubmit() returns the activity to the approval process; schedule() moves an approved activity to Scheduled; start() moves it to Ongoing; and complete() moves it to Completed.
+43.2 State Diagram — Visit
+State
+Description
+Initial
+No visit record exists yet.
+Information Entered
+Coordinator has entered visit details.
+Validating
+System validates company and mandatory visit information.
+Recorded
+Valid visit record has been created.
+Validation Error
+Entered information is incomplete or invalid.
+Engagement Logged
+The visit has been added to the company's engagement history.
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Events and guards: enterVisitData() creates visit information; validate() starts validation; [valid] permits the Recorded state; [invalid] produces a validation error; correctData() allows correction; and updateEngagement() adds the visit to engagement history.
+44. Component Modelling
+The component model provides the implementation-level structure required to support the same three use cases. It is based on the service responsibilities identified in Assignment 4, including CompanyService, VisitService, RecruitmentActivityService, ApprovalService, EngagementHistoryService and ValidationService.
+44.1 Component Diagram
+Major components:
+Web User Interface
+Authentication & Access Control
+Company Management
+Visit Management
+Recruitment Activity Management
+Approval Management
+Validation Service
+Engagement History Management
+Company Engagement Database
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+Component Responsibilities
+Component
+Responsibility
+Web User Interface
+Provides interfaces through which authorized users interact with the system.
+Authentication & Access Control
+Authenticates users and applies role-based access.
+Company Management
+Creates, updates and searches company profiles.
+Visit Management
+Records and manages company visits.
+Recruitment Activity Management
+Creates, validates and submits recruitment activities.
+Approval Management
+Reviews and approves/rejects recruitment activities.
+Validation Service
+Validates required information, company existence and activity status.
+Engagement History Management
+Records and retrieves company engagement history.
+Company Engagement Database
+Stores users, companies, contacts, visits, recruitment activities, approvals and engagement records.
+Component Dependencies
+Web User Interface depends on Authentication & Access Control, Company Management, Visit Management and Recruitment Activity Management. Company Management, Visit Management and Recruitment Activity Management use the Validation Service where required. Recruitment Activity Management interacts with Approval Management. Visit Management and relevant recruitment workflows interact with Engagement History Management. The management components persist their information in the Company Engagement Database.
+45. Consistency and Traceability
+The LNM Institute of Information Technology, Jaipur Software Development Laboratory
+Course Code: CS314
+The Assignment 5 models maintain the following modelling chain:
+Requirements → 3 Detailed Use Cases → Scenarios → Activities → Classes → Objects & Relationships → Collaboration → States → Components
+45.1 UC-006 — Record Company Visit
+The collaboration model uses TPCoordinator, Company, CompanyService, Visit, VisitService, ValidationService, EngagementHistory, EngagementHistoryService and EngagementRecord. The state model represents the transition of a visit from entering information through validation, recording and engagement-history logging. The component model provides the Visit Management, Validation Service and Engagement History Management components required to implement the workflow.
+45.2 UC-008 — Submit Recruitment Activity
+The collaboration model uses TPCoordinator, RecruitmentActivity, RecruitmentActivityService and ValidationService. The workflow remains consistent with the previously defined process in which the coordinator selects a draft activity, reviews it, validates it and submits it for approval. The RecruitmentActivity state model represents the Draft → Submitted → Under Review progression and subsequent lifecycle.
+45.3 UC-009 — Approve Recruitment Activity
+The collaboration model uses ApprovingAuthority, ApprovalService, RecruitmentActivity and Approval. The model represents the approval decision and recording of the approver and decision date, followed by the transition of RecruitmentActivity to Approved or the existing rejection flow.
+45.4 Overall Consistency
+No new functional requirements or use cases are introduced in Assignment 5. The collaboration diagrams explain how existing objects interact, the state diagrams explain how important objects change state, and the component diagram explains how the system can be organized into implementation components.
+46. Individual Contribution
+Team Member
+Contribution
+Hitesh Jain
+Prepared and reviewed collaboration diagrams for UC-006 and verified consistency with the previous scenarios.
+Anand Patidar
+Prepared collaboration diagram for UC-008 and reviewed object-message interactions.
+Pranav Vashisth
+Prepared state diagrams for RecruitmentActivity and Visit and verified lifecycle consistency.
+Avesh Khan
+Prepared the component diagram and performed overall consistency and documentation review.
+47. AI Usage Policy – Student Declaration
+We have disclosed the use of AI tools, if any.
+AI-generated suggestions have been reviewed, verified and adapted by the team.
+We understand and can explain the submitted collaboration diagrams, state diagrams and component diagram.
+We have verified that the UML models are consistent with our project's requirements, use cases, classes, objects and scope.
+The final submission represents our team's understanding and modelling decisions.
+Field
+Details
+AI Tool(s) Used
+ChatGPT
+Purpose of AI Use
+AI was used as a supporting tool for structuring collaboration diagrams, state transition descriptions, component relationships and checking consistency with the UML models developed in previous assignments.
+Team ID
+T066
+Team Representative
+Pranav Vashisth
+Date
+27/09/2026
+The LNM Institute of Information Technology, JaipurSoftware Development LaboratoryCourse Code: CS314
+Lab Assignment 6: Solution
+Software Design Modelling — Data/Class Design and Architectural Design
+Project: Company Engagement Portal    Team ID: T066Team Members: Hitesh Jain, Anand Patidar, Pranav Vashisth, Avesh Khan
+Purpose: This assignment transforms the analysis models of Assignments 4 and 5 into a design model for the Company Engagement Portal. The same three detailed use cases are used throughout: UC-006 Record Company Visit, UC-008 Submit Recruitment Activity and UC-009 Approve Recruitment Activity. No new functionality beyond the SRS (v1.0) is introduced.
+1. Data/Class Design
+1.1 Refinements made over the Assignment 4 analysis model
+Analysis model (Assignment 4)
+Design model (this assignment)
+Reason
+Attributes had names only
+Every attribute has a data type and visibility (all private, "-")
+Needed for implementation
+Operations had names only
+Operations have parameters, return types and visibility ("+")
+Needed to code the interfaces
+Status was a plain attribute
+Enumerations: UserRole, ActivityStatus, Decision, VisitState, EngagementType, CompanyStatus, AccountStatus
+Prevents invalid values; matches the lifecycle in SRS and Assignment 5 state diagram
+Services had no data access
+Repository<T> interface + concrete repositories added; services depend on repositories
+Separates business logic from database access
+Services directly shown as dependencies only
+Services hold a private reference to their repository; ValidationService returns a ValidationResult
+Testable, loosely coupled design
+Approval history and archive not explicit
+Approval.decisionDate / approver recorded (BR-010); EngagementRecord.archived flag (BR-008)
+Business rules enforced in the data design
+Role classes only
+User made abstract; TPCoordinator and ApprovingAuthority concrete subclasses
+Role-specific behaviour, shared login logic
+1.2 Design Class Diagram
+Figure 1: Design Class Diagram (Design-Class-Diagram.png). Domain classes, «service» classes, «persistence» classes and enumerations are marked by stereotypes. "-" private, "+" public.
+1.3 Relationships (design level)
+Relationship
+Type
+Multiplicity
+Note
+TPCoordinator, ApprovingAuthority → User
+Generalization
+—
+Inherit authenticate(), logout(), hasRole()
+Company — Contact
+Composition
+1 : 0..*
+Contact cannot exist without Company (BR-009)
+Company — Visit
+Association
+1 : 0..*
+FR-016 to FR-019
+Company — RecruitmentActivity
+Association
+1 : 0..*
+FR-020, FR-021
+Company — EngagementHistory
+Association
+1 : 1
+One timeline per company
+EngagementHistory — EngagementRecord
+Composition
+1 : 0..*
+Records are archived, never deleted (BR-008)
+RecruitmentActivity — Approval
+Composition
+1 : 0..*
+Approval history (BR-010)
+ApprovingAuthority — Approval
+Association
+1 : 0..*
+Records who decided
+TPCoordinator — Visit / RecruitmentActivity
+Association
+1 : 0..*
+Who recorded / created
+Service → Domain class
+Dependency
+—
+Services create and update domain objects
+VisitService → CompanyService, ValidationService, EngagementHistoryService
+Dependency
+—
+Collaboration from Assignment 5
+Concrete repositories → Repository<T>
+Realization
+—
+Data access abstraction
+1.3a Visibility and data structures
+Attributes are private (-); operations used by other classes are public (+). Internal helper methods are private.
+Attendees in Visit is a List<String> (stored in a separate VisitAttendee table, one row per attendee).
+EngagementHistory.getTimeline() returns a List<EngagementRecord> sorted by recordDate descending (FR-032).
+ValidationResult is a small value object: isValid : boolean, errors : List<String>.
+1.4 Persistent data (database tables)
+Table
+Columns (PK = primary key, FK = foreign key)
+Source class
+users
+user_id PK, name, email (unique), password_hash, role, account_status
+User
+companies
+company_id PK, name (unique, BR-004), industry, address, website, status, notes
+Company
+contacts
+contact_id PK, company_id FK, name, designation, email, phone, department
+Contact
+visits
+visit_id PK, company_id FK, recorded_by FK(users), visit_date, purpose, outcome, notes
+Visit
+visit_attendees
+visit_id FK, attendee_name
+Visit.attendees
+recruitment_activities
+activity_id PK, company_id FK, created_by FK(users), title, type, activity_date, eligibility_criteria, positions_offered, status
+RecruitmentActivity
+approvals
+approval_id PK, activity_id FK, approver_id FK(users), decision, comments, decision_date
+Approval
+engagement_records
+record_id PK, company_id FK, type, description, record_date, recorded_by FK(users), archived
+EngagementHistory / EngagementRecord
+1.5 Responsibilities of important classes
+Class
+Responsibility
+User
+Holds account data; authenticates user and checks role (FR-001 to FR-005).
+TPCoordinator
+Initiates company, visit and recruitment activity actions (UC-006, UC-008).
+ApprovingAuthority
+Reviews and decides on submitted activities (UC-009).
+Company / Contact
+Stores company profile and contact data; knows if profile is active.
+Visit
+Holds visit data and its own state; validates itself and saves.
+RecruitmentActivity
+Holds activity data and status; knows whether it can be submitted; changes status along the lifecycle.
+Approval
+Stores decision, comments, approver and decision date.
+EngagementHistory / EngagementRecord
+Keeps chronological history of visits, contact updates and activities.
+VisitService
+Coordinates UC-006: lookup, validate, save visit, log engagement.
+RecruitmentActivityService
+Coordinates UC-008: validate and submit activity.
+ApprovalService
+Coordinates UC-009: review, approve/reject, record decision.
+ValidationService
+Central validation of required fields, status and company existence.
+EngagementHistoryService
+Appends and reads engagement records.
+Repositories
+CRUD operations on the database; no business logic.
+2. Architectural Design
+2.1 Architectural style
+Selected style: Layered (N-tier) architecture, combined with a client-server model (web browser = client, server application + database = server) and object-oriented design inside the layers.
+2.2 Justification
+The system is a web application with a centralized database (SRS assumptions) — this fits client-server and layered styles directly.
+NFR-014 requires modular architecture and NFR-017 requires scalability; layers can be changed or scaled independently.
+The Assignment 4/5 classes already separate domain, service and data responsibilities, so they map naturally onto layers.
+Security (NFR-004 to NFR-006) is easy to enforce at one controller/security layer instead of on every screen.
+Easy for a small student team to divide work and test layer by layer.
+2.3 Architectural diagram
+Figure 2: Layered architecture of the Company Engagement Portal (Architectural-Diagram.png).
+2.4 Subsystems and responsibilities
+Layer / Subsystem
+Responsibility
+Depends on
+Presentation Layer (Web UI)
+Screens, forms, validation messages, navigation
+Controller layer
+Controller / API Layer
+Receives requests, checks access, calls services, returns results
+Business layer, Security
+Business (Service) Layer
+Use-case logic: company, visit, activity, approval, validation, engagement history
+Data Access layer
+Data Access Layer
+Repositories that read/write database records
+Database
+Company Engagement Database
+Persistent storage of all entities (Section 1.4)
+—
+Authentication & Access Control (cross-cutting)
+Login, session handling, role-based access (BR-001, BR-005, BR-006)
+User data
+Audit / Error Logging (cross-cutting)
+Logs administrative and approval actions (NFR-007, NFR-020)
+Database / log file
+2.4a Communication rules
+Calls go downward only: UI → Controller → Service → Repository → Database. A lower layer never calls a higher layer.
+Services may call other services (VisitService → ValidationService, CompanyService, EngagementHistoryService).
+Browser and UI communicate over HTTPS; repositories communicate with the database using SQL.
+2.5 External systems
+Only the end-user web browser and the relational database are external to the application. As per SRS (Initially Out of Scope and Future Requirements), no integration with external hiring systems, institutional authentication, ERP or payment services is part of this version, so none is shown.
+2.6 Support for the three use cases
+Use case
+Presentation
+Controller
+Service
+Data
+UC-006 Record Company Visit
+S2 Company Details, S3 Record Visit
+CompanyController, VisitController
+CompanyService, VisitService, ValidationService, EngagementHistoryService
+companies, visits, visit_attendees, engagement_records
+UC-008 Submit Recruitment Activity
+S4 Activity Details
+ActivityController
+RecruitmentActivityService, ValidationService
+recruitment_activities
+UC-009 Approve Recruitment Activity
+S5 Approval Review
+ApprovalController
+ApprovalService, RecruitmentActivityService
+approvals, recruitment_activities
+Individual Contribution
+Team Member
+Contribution
+Hitesh Jain
+Prepared Data/Class Design tables and refined attributes and operations.
+Anand Patidar
+Prepared the Design Class Diagram and relationship table.
+Pranav Vashisth
+Prepared the Architectural Design and justification.
+Avesh Khan
+Prepared persistent data design, consistency review and documentation.
+ 
+The LNM Institute of Information Technology, JaipurSoftware Development LaboratoryCourse Code: CS314
+Lab Assignment 7: Solution
+Software Design Modelling — Interface, Component-Level Design and Traceability
+Project: Company Engagement Portal    Team ID: T066Team Members: Hitesh Jain, Anand Patidar, Pranav Vashisth, Avesh Khan
+3. Interface Design
+3.1 User Interface Design
+The project is a web application, so the user interacts through browser screens. Screens needed for the three use cases:
+ID
+Screen
+Used in
+Main inputs / outputs
+Wireframe
+S1
+Login
+All (precondition)
+Email, password, Login button; error message
+UI-Wireframe-01.png
+S2
+Company Details
+UC-006
+Company data, Record Visit button, recent engagement
+UI-Wireframe-02.png
+S3
+Record Visit
+UC-006
+Date, purpose, attendees, outcome, notes; Save / Cancel
+UI-Wireframe-03.png
+S4
+Recruitment Activity Details
+UC-008
+Activity data, status, Save Draft / Submit for Approval
+UI-Wireframe-04.png
+S5
+Approval Review
+UC-009
+Activity data, comments, Approve / Reject
+UI-Wireframe-05.png
+Navigation flow
+S1 Login --(success)--> Dashboard  Coordinator: Dashboard -> Company Search -> S2 Company Details -> S3 Record Visit -> (saved) -> S2  Coordinator: Dashboard -> Activities -> S4 Activity Details -> (submitted) -> Activities list  Approver:    Dashboard -> Review Queue -> S5 Approval Review -> (decision saved) -> Review Queue
+Wireframes
+Figure 3: UI-Wireframe-01.png — S1 Login with authentication-failure message (FR-002).
+Figure 4: UI-Wireframe-02.png — S2 Company Details — start of UC-006.
+Figure 5: UI-Wireframe-03.png — S3 Record Visit showing validation errors for missing mandatory fields.
+Figure 6: UI-Wireframe-04.png — S4 Recruitment Activity — submit blocked because eligibility is missing.
+Figure 7: UI-Wireframe-05.png — S5 Approval Review — approve/reject with comments.
+Validation and error messages
+Screen
+Condition
+Message shown
+S1
+Wrong email/password
+Invalid email or password. Please try again. (no detail about which one is wrong)
+S1
+Inactive account
+Your account is not active. Contact the administrator.
+S2
+Company not found (UC-006 alt. flow)
+Company profile does not exist. Please create the profile first.
+S3
+Visit date empty
+Visit date is required.
+S3
+Attendees / purpose / outcome empty
+<Field> is required.
+S3
+Visit date invalid format
+Enter date as dd-mm-yyyy.
+S3
+Saved successfully
+Visit recorded and engagement history updated.
+S4
+Required field missing
+Cannot submit: <field> is required.
+S4
+Status is not DRAFT/REVISION
+Only DRAFT or REVISION activities can be submitted.
+S4
+Submitted successfully
+Activity submitted. Status changed to SUBMITTED.
+S5
+Reject without reason
+Please provide a reason for rejection.
+S5
+Activity not in reviewable state
+This activity is not available for review.
+All
+No permission for role
+You are not authorized to perform this action.
+3.2 Software Interface Design
+Each major component exposes one interface. Errors are returned as an error code with a message (ValidationException, NotFoundException, UnauthorizedException, InvalidStateException).
+Interface
+Operation
+Input
+Output
+Error responses
+IAuthService
+login(email, password)
+email, password
+Session token + role
+AUTH_FAILED, ACCOUNT_INACTIVE
+IAuthService
+checkAccess(token, action)
+token, action name
+boolean
+UNAUTHORIZED
+ICompanyService
+findCompany(companyId)
+companyId
+Company
+NOT_FOUND
+IVisitService
+recordVisit(VisitDTO)
+companyId, date, purpose, attendees, outcome, notes, userId
+Visit (state RECORDED)
+NOT_FOUND (company), VALIDATION_ERROR (list of fields)
+IVisitService
+updateVisit(visitId, VisitDTO)
+visitId, new data
+Visit
+NOT_FOUND, VALIDATION_ERROR
+IRecruitmentService
+createActivity(ActivityDTO)
+company, title, type, date, eligibility, positions
+Activity (DRAFT)
+VALIDATION_ERROR
+IRecruitmentService
+submitActivity(activityId, userId)
+activityId, userId
+Activity (SUBMITTED)
+NOT_FOUND, VALIDATION_ERROR, INVALID_STATE
+IRecruitmentService
+changeStatus(activityId, status)
+activityId, new status
+Activity
+INVALID_STATE
+IApprovalService
+reviewActivity(activityId)
+activityId
+Activity (UNDER_REVIEW)
+NOT_FOUND, INVALID_STATE
+IApprovalService
+approve(activityId, approverId, comments)
+ids, comments
+Approval + status APPROVED
+UNAUTHORIZED, INVALID_STATE
+IApprovalService
+reject(activityId, approverId, reason)
+ids, reason
+Approval + status REJECTED
+VALIDATION_ERROR (reason empty), INVALID_STATE
+IValidationService
+validateRequiredFields(object)
+DTO
+ValidationResult
+—
+IValidationService
+validateStatus(activity)
+activity
+ValidationResult
+—
+IValidationService
+validateCompanyExists(companyId)
+companyId
+boolean
+—
+IEngagementService
+appendRecord(companyId, type, description, userId)
+values
+EngagementRecord
+NOT_FOUND
+IEngagementService
+viewHistory(companyId)
+companyId
+List<EngagementRecord> (chronological)
+NOT_FOUND
+IRepository<T>
+save / findById / findAll
+entity or id
+entity / list
+DB_ERROR
+How the interfaces support the workflows
+UC-006: UI → IVisitService.recordVisit → ICompanyService.findCompany, IValidationService, IRepository.save, IEngagementService.appendRecord.
+UC-008: UI → IRecruitmentService.submitActivity → IValidationService → IRepository.save.
+UC-009: UI → IApprovalService.approve → IRecruitmentService.changeStatus, IRepository.save (Approval).
+4. Component-Level Design
+4.1 Refined component diagram
+The Assignment 5 component diagram is refined by showing the provided interfaces and by connecting Approval Management to Recruitment Activity Management and Engagement History Management through interfaces.
+Figure 8: Refined Component Diagram (Component-Design-Diagram.png).
+4.2 Components, responsibilities and class mapping
+Component
+Responsibility
+Classes / operations (from design class model)
+Web User Interface
+Screens S1–S5, shows messages
+—
+Authentication & Access Control
+Login, role check
+User.authenticate(), hasRole(), logout()
+Company Management
+Find/view company
+CompanyService.findCompany(); Company, Contact
+Visit Management
+Record and update visits
+VisitService.recordVisit(), updateVisit(); Visit.validate(), save()
+Recruitment Activity Management
+Create, validate, submit activities
+RecruitmentActivityService.submitActivity(); RecruitmentActivity.canSubmit(), submit(), changeStatus()
+Approval Management
+Review, approve/reject
+ApprovalService.reviewActivity(), approve(), reject(); Approval.recordDecision()
+Validation Service
+Rule checks
+ValidationService.validateRequiredFields(), validateStatus(), validateCompanyExists()
+Engagement History Management
+Log and read history
+EngagementHistoryService.appendRecord(); EngagementHistory.addRecord(); EngagementRecord.create()
+Company Engagement Database
+Storage
+Repositories; tables in Section 1.4
+4.3 Component specification — UC-006: VisitService.recordVisit()
+Item
+Details
+Component
+Visit Management
+Input
+companyId, visitDate, purpose, attendees, outcome, notes, userId
+Output
+Visit (state RECORDED) or error
+Pre-condition
+User is authenticated as Coordinator
+Post-condition
+Visit saved and linked to company; EngagementRecord of type VISIT added (FR-030)
+Uses
+CompanyService, ValidationService, VisitRepository, EngagementHistoryService
+FUNCTION recordVisit(data, userId)  IF NOT validationService.validateCompanyExists(data.companyId) THEN      THROW NotFoundException("Company profile does not exist. Please create the profile first.")  result = validationService.validateRequiredFields(data)   // date, purpose, attendees, outcome  IF result.isValid = false THEN      visit.state = ERROR      THROW ValidationException(result.errors)               // shown on S3  visit = NEW Visit(data)                                    // state = ENTERED  visit.state = VALIDATING  IF visit.validate() = false THEN THROW ValidationException  BEGIN TRANSACTION      visit.state = RECORDED      visitRepo.save(visit)      engagementHistoryService.appendRecord(data.companyId, VISIT, data.purpose, userId)      visit.state = LOGGED  COMMIT  ON ERROR in transaction: ROLLBACK, log error, THROW "Visit could not be saved. Please try again."  RETURN visit
+Decisions and exceptions: company missing → NotFoundException; mandatory field missing → ValidationException; database failure → rollback so a visit is never saved without its engagement record (NFR-012).
+4.4 Component specification — UC-008: RecruitmentActivityService.submitActivity()
+Item
+Details
+Component
+Recruitment Activity Management
+Input
+activityId, userId
+Output
+RecruitmentActivity with status SUBMITTED or error
+Pre-condition
+Coordinator authenticated; activity exists in DRAFT (or REVISION) status
+Post-condition
+Status = SUBMITTED, available to approver (FR-024)
+Uses
+ValidationService, ActivityRepository
+FUNCTION submitActivity(activityId, userId)  activity = activityRepo.findById(activityId)  IF activity = NULL THEN THROW NotFoundException  IF activity.createdBy != userId THEN THROW UnauthorizedException  r1 = validationService.validateRequiredFields(activity)   // title, company, type, date,                                                            // eligibility, positions  r2 = validationService.validateStatus(activity)           // must be DRAFT or REVISION  IF r1.isValid = false OR r2.isValid = false THEN      THROW ValidationException(r1.errors + r2.errors)      // shown on S4  IF activity.status = CANCELLED THEN THROW InvalidStateException   // BR-007  activity.submit()                                         // sets status = SUBMITTED  activityRepo.save(activity)  RETURN activity
+Decisions and exceptions: missing field → "Cannot submit: <field> is required."; wrong status → "Only DRAFT or REVISION activities can be submitted."; cancelled activity cannot be edited or submitted (BR-007).
+4.5 Component specification — UC-009: ApprovalService.approve()
+Item
+Details
+Component
+Approval Management
+Input
+activityId, approverId, comments
+Output
+Approval record; activity status APPROVED
+Pre-condition
+User is authenticated as Approving Authority; activity is SUBMITTED / UNDER_REVIEW
+Post-condition
+Approval stored with approver identity and decision date (BR-010); status = APPROVED (FR-025)
+Uses
+RecruitmentActivityService, ApprovalRepository, EngagementHistoryService
+FUNCTION approve(activityId, approverId, comments)  IF NOT user(approverId).hasRole(APPROVER) THEN THROW UnauthorizedException  activity = activityRepo.findById(activityId)  IF activity = NULL THEN THROW NotFoundException  IF activity.status NOT IN (SUBMITTED, UNDER_REVIEW) THEN      THROW InvalidStateException("This activity is not available for review.")  IF activity.status = SUBMITTED THEN activity.changeStatus(UNDER_REVIEW)  BEGIN TRANSACTION      approval = NEW Approval(activityId, approverId, APPROVED, comments, NOW())      approvalRepo.save(approval)                       // approver + decision date stored      activity.changeStatus(APPROVED)      activityRepo.save(activity)      engagementHistoryService.appendRecord(activity.companyId, ACTIVITY, "Activity approved", approverId)  COMMIT  RETURN approvalFUNCTION reject(activityId, approverId, reason)          // alternative flow UC-010  IF reason is empty THEN THROW ValidationException("Please provide a reason for rejection.")  ... same steps with decision = REJECTED and status = REJECTED
+Decisions and exceptions: not an approver → UnauthorizedException; activity in another state → InvalidStateException; database failure → rollback so status and approval record stay consistent.
+4.6 Component dependencies
+Component
+Depends on (interface used)
+Web User Interface
+Auth, Company, Visit, Recruitment, Approval interfaces
+Visit Management
+ICompanyService, IValidationService, IEngagementService, IRepository
+Recruitment Activity Management
+IValidationService, IRepository
+Approval Management
+IRecruitmentService, IEngagementService, IRepository
+Engagement History Management
+IRepository
+Validation Service
+None (pure rule checks)
+5. Design Consistency and Traceability
+5.1 Traceability chain
+SRS → Use Cases → Scenarios and Activity Diagrams → Analysis Classes and Relationships → Collaboration and State Models → Design Class Model → Architectural Design → Interface Design → Component-Level Design
+Use case
+SRS (FR / BR)
+Assignment 3 activity
+Assignment 4 classes
+Assignment 5 collaboration / state
+Design class model
+Architecture
+Interface
+Component spec
+UC-006
+FR-016–019, FR-030, BR-005, BR-009
+Activity UC-006
+TPCoordinator, Company, Visit, EngagementHistory, EngagementRecord
+Collab 42.1; Visit state
+VisitService, Visit, ValidationService
+Visit/Company controllers + services
+S2, S3; IVisitService
+4.3 recordVisit()
+UC-008
+FR-020–024, BR-007
+Activity UC-008
+TPCoordinator, RecruitmentActivity
+Collab 42.2; Activity state
+RecruitmentActivityService, RecruitmentActivity
+ActivityController + service
+S4; IRecruitmentService
+4.4 submitActivity()
+UC-009
+FR-025–027, BR-002, BR-010
+Activity UC-009
+ApprovingAuthority, Approval, RecruitmentActivity
+Collab 42.3; Activity state
+ApprovalService, Approval
+ApprovalController + service
+S5; IApprovalService
+4.5 approve()
+5.2 Consistency checks
+The three use cases are exactly UC-006, UC-008 and UC-009 from Assignments 2–5.
+All design classes come from Assignment 4 classes; new elements (enumerations, repositories, DTOs, ValidationResult) are implementation details, not new functionality.
+Business rules are enforced: BR-002/BR-003 (approval before publish), BR-007 (cancelled not editable), BR-008 (archive only), BR-009 (contact linked to company), BR-010 (approver and date recorded).
+The status values in ActivityStatus match the lifecycle in the SRS and the Assignment 5 state diagram.
+Every interface operation is used by at least one screen or one component specification.
+The refined component diagram uses the same nine components as Assignment 5, with interfaces added.
+GitHub Submission Structure
+docs/design/assignment-06/  Data-Class-Design.md  Architectural-Design.md  Interface-Design.md  Component-Level-Design.md  Design-Traceability.md  diagrams/    Design-Class-Diagram.png    Architectural-Diagram.png    Component-Design-Diagram.png    interfaces/UI-Wireframe-01.png ... UI-Wireframe-05.png
+Individual Contribution
+Team Member
+Contribution
+Hitesh Jain
+Prepared Interface Design (wireframes and validation messages).
+Anand Patidar
+Prepared Software Interface specification.
+Pranav Vashisth
+Prepared Component-Level Design for UC-006 and UC-008.
+Avesh Khan
+Prepared Component-Level Design for UC-009, traceability matrix and final review.
+AI Usage Policy – Student Declaration
+We have disclosed the use of AI tools, if any.
+AI-generated suggestions have been reviewed, verified and adapted by the team.
+We understand and can explain the submitted design models.
+We have verified that the designs are consistent with our project requirements, use cases and scope.
+The final submission represents our team's understanding and design decisions.
+Field
+Details
+AI Tool(s) Used
+ Claude and ChatGPT
+Purpose of AI Use
+AI was used as a supporting tool for drafting design content and diagrams, checked against Assignments 1–5.
+Team ID
+T066
+Team Representative
+Pranav Vashisth
+Date
+22/10/2026
