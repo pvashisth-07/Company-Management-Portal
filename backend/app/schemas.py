@@ -6,7 +6,7 @@ from pydantic import BaseModel, EmailStr, Field
 class UserBase(BaseModel):
     name: str = Field(..., min_length=2)
     email: str
-    role: str = "COORDINATOR"  # COORDINATOR, APPROVER, ADMIN
+    role: str = "USER"  # USER, COORDINATOR, APPROVER, ADMIN, MANAGEMENT
 
 class UserCreate(UserBase):
     password: str = Field(..., min_length=4)

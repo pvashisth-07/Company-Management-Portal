@@ -227,7 +227,7 @@ def cancel_activity(
 @router.post("/{activity_id}/progress-status", response_model=RecruitmentActivityResponse)
 def progress_activity_status(
     activity_id: int,
-    new_status: str = Query(..., description="Target status: SCHEDULED, ONGOING, COMPLETED"),
+    new_status: str = Query(..., description="Target status: PUBLISHED, SCHEDULED, ONGOING, COMPLETED, REVISION"),
     user_id: int = Query(...),
     db: Session = Depends(get_db)
 ):
@@ -235,11 +235,25 @@ def progress_activity_status(
     if not activity:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Recruitment activity not found.")
 
+    # BR-002: A recruitment activity must be approved before it is published.
+    if new_status == "PUBLISHED" and activity.status not in ["APPROVED", "SCHEDULED"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="A recruitment activity must be approved before it is published (BR-002)."
+        )
+
     # BR-003: Only approved recruitment activities can be scheduled/executed.
-    if new_status in ["SCHEDULED", "ONGOING", "COMPLETED"] and activity.status not in ["APPROVED", "SCHEDULED", "ONGOING"]:
+    if new_status in ["SCHEDULED", "ONGOING", "COMPLETED"] and activity.status not in ["APPROVED", "PUBLISHED", "SCHEDULED", "ONGOING"]:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Only approved recruitment activities can be scheduled or conducted (current status: {activity.status})."
+        )
+
+    # State machine: Rejected -> Revision
+    if new_status == "REVISION" and activity.status != "REJECTED":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Only REJECTED activities can transition to REVISION for editing."
         )
 
     activity.status = new_status
@@ -255,3 +269,4 @@ def progress_activity_status(
     )
 
     return format_activity_response(activity)
+

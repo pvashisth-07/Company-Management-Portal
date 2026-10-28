@@ -37,6 +37,8 @@ export const getVisitsApi = (companyId) =>
 export const getVisitByIdApi = (visitId) => api.get(`/visits/${visitId}`);
 export const recordVisitApi = (visitData, userId) => 
   api.post('/visits', visitData, { params: { user_id: userId } });
+export const updateVisitApi = (visitId, visitData, userId) => 
+  api.put(`/visits/${visitId}`, visitData, { params: { user_id: userId } });
 
 // Recruitment Activities (UC-008)
 export const getActivitiesApi = (params) => api.get('/activities', { params });

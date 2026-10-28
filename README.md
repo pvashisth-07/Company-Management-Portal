@@ -64,43 +64,53 @@ The system follows an **N-Tier Layered Architecture** with a decoupled Client-Se
 
 ## 🚀 Quick Start Guide
 
-### Prerequisites
-- **Node.js** (v18+) and **npm**
-- **Python** (v3.10+)
+### Option A: One-Click Startup (Recommended)
+You can launch both backend and frontend servers simultaneously using the provided scripts:
 
-### 1. Start the Backend API
-In a terminal, navigate to the `backend` directory:
-```bash
+- **Command Prompt (CMD) / Double Click:**
+  ```cmd
+  run.bat
+  ```
+- **PowerShell:**
+  ```powershell
+  .\run.ps1
+  ```
+
+### Option B: Manual Startup in Two Terminals
+
+#### Terminal 1: Backend API
+```powershell
 cd backend
 python -m pip install -r requirements.txt
-python seed.py        # Populates realistic LNMIIT demo data & users
+python seed.py        # Populates realistic LNMIIT demo data & personas
 python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
-The FastAPI interactive Swagger UI will be available at: **http://127.0.0.1:8000/docs**
+Swagger UI: **http://127.0.0.1:8000/docs**
 
-### 2. Start the Frontend Development Server
-In a second terminal, navigate to the `frontend` directory:
-```bash
+#### Terminal 2: Frontend App
+```powershell
 cd frontend
 npm install
 npm run dev
 ```
-Open your browser and navigate to: **http://localhost:5173/**
+Web App: **http://127.0.0.1:5173/**
 
 ---
 
 ## 👥 Demo Personas & 1-Click Role Switcher
 
-For live evaluations and presentations, the top navigation bar features a **1-Click Demo Persona Switcher** allowing you to instantly switch roles without retyping credentials:
+For live evaluations and presentations, the portal features a **1-Click Demo Persona Switcher** on the login screen and globally in the top bar:
 
 | Persona Name | Institutional Role | Primary Responsibilities & Use Cases | Default Email |
 | :--- | :--- | :--- | :--- |
-| **Hitesh Jain** | `COORDINATOR` | Create Company (FR-006), Record Visit (UC-006), Draft & Submit Drives (UC-008) | `hitesh.coordinator@lnmiit.ac.in` |
-| **Dr. Anand Patidar** | `APPROVER` | Review submitted drives, Approve (UC-009), Reject with reasons (UC-010) | `anand.approver@lnmiit.ac.in` |
-| **Pranav Vashisth** | `ADMIN` | User administration (FR-004), role assignment, account status toggle | `pranav.admin@lnmiit.ac.in` |
-| **Avesh Khan** | `COORDINATOR` | Company engagement logging & contact management | `avesh.coordinator@lnmiit.ac.in` |
+| **Hitesh Jain** | `COORDINATOR` | Create Company (FR-006), Edit Profile (FR-008), Record Visit (UC-006), Edit Visit (FR-018), Draft & Submit Drives (UC-008) | `hitesh.coordinator@lnmiit.ac.in` |
+| **Dr. Anand Patidar** | `APPROVER` | Review submitted drives, Approve (UC-009), Reject with mandatory rationale (UC-010, BR-010) | `anand.approver@lnmiit.ac.in` |
+| **Pranav Vashisth** | `ADMIN` | User administration (FR-004), role assignment, account status toggle (FR-005) | `pranav.admin@lnmiit.ac.in` |
+| **Avesh Khan** | `COORDINATOR` | Company engagement logging & contact management (FR-011 - FR-015) | `avesh.coordinator@lnmiit.ac.in` |
+| **Prof. Subrat Kar** | `MANAGEMENT` | Aggregated executive reports, sector analytics & institutional dashboards (User Class 11.5 / US-009) | `director.mgmt@lnmiit.ac.in` |
 
 *Default password for manual login on S1:* `password123`
+*Traceability Matrix:* Accessible anytime via the **RTM Traceability** button in the top navbar.
 
 ---
 

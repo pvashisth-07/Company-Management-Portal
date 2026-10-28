@@ -133,3 +133,60 @@ def record_visit(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Visit could not be saved. Please try again. ({str(e)})"
         )
+
+@router.put("/{visit_id}", response_model=VisitResponse)
+def update_visit(
+    visit_id: int,
+    visit_data: VisitUpdate,
+    user_id: int = Query(...),
+    db: Session = Depends(get_db)
+):
+    """
+    Realizes FR-018: Edit Visit Record (modify a visit record and log update to engagement history)
+    """
+    visit = db.query(Visit).filter(Visit.visit_id == visit_id).first()
+    if not visit:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Visit record not found.")
+
+    if visit_data.visit_date is not None:
+        visit.visit_date = visit_data.visit_date.strip()
+    if visit_data.purpose is not None:
+        visit.purpose = visit_data.purpose.strip()
+    if visit_data.outcome is not None:
+        visit.outcome = visit_data.outcome.strip()
+    if visit_data.notes is not None:
+        visit.notes = visit_data.notes.strip()
+
+    if visit_data.attendees is not None:
+        # Replace attendees
+        db.query(VisitAttendee).filter(VisitAttendee.visit_id == visit_id).delete()
+        for name in visit_data.attendees:
+            if name.strip():
+                db.add(VisitAttendee(visit_id=visit.visit_id, attendee_name=name.strip()))
+
+    # Update engagement record
+    EngagementHistoryService.append_record(
+        db=db,
+        company_id=visit.company_id,
+        record_type="VISIT",
+        description=f"Visit record updated (Date: {visit.visit_date}, Purpose: {visit.purpose}). Outcome: {visit.outcome}",
+        recorded_by=user_id
+    )
+
+    db.commit()
+    db.refresh(visit)
+
+    return {
+        "visit_id": visit.visit_id,
+        "company_id": visit.company_id,
+        "recorded_by": visit.recorded_by,
+        "visit_date": visit.visit_date,
+        "purpose": visit.purpose,
+        "outcome": visit.outcome,
+        "notes": visit.notes,
+        "created_at": visit.created_at,
+        "attendees": [{"id": a.id, "attendee_name": a.attendee_name} for a in visit.attendees],
+        "company_name": visit.company.name if visit.company else "Unknown Company",
+        "recorder_name": visit.recorder.name if visit.recorder else "Coordinator"
+    }
+

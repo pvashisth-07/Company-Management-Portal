@@ -36,7 +36,7 @@ def update_user_status_or_role(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
 
     if update_data.role:
-        if update_data.role not in ["COORDINATOR", "APPROVER", "ADMIN"]:
+        if update_data.role not in ["COORDINATOR", "APPROVER", "ADMIN", "MANAGEMENT", "COMPANY_REP", "USER"]:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid role specified.")
         user.role = update_data.role
 

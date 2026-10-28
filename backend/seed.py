@@ -55,7 +55,15 @@ def seed_database():
             account_status="ACTIVE",
             created_at=datetime.utcnow() - timedelta(days=60)
         )
-        db.add_all([u_coord1, u_approver, u_admin, u_coord2])
+        u_mgmt = User(
+            name="Prof. Subrat Kar",
+            email="director.mgmt@lnmiit.ac.in",
+            password_hash=hash_pw("password123"),
+            role="MANAGEMENT",
+            account_status="ACTIVE",
+            created_at=datetime.utcnow() - timedelta(days=90)
+        )
+        db.add_all([u_coord1, u_approver, u_admin, u_coord2, u_mgmt])
         db.commit()
 
         print("🏢 Seeding Companies...")

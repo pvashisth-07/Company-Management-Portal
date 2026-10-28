@@ -46,7 +46,7 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
         name=user_data.name.strip(),
         email=user_data.email.lower().strip(),
         password_hash=hash_password(user_data.password),
-        role=user_data.role if user_data.role in ["COORDINATOR", "APPROVER", "ADMIN"] else "COORDINATOR",
+        role=user_data.role if user_data.role in ["COORDINATOR", "APPROVER", "ADMIN", "MANAGEMENT", "COMPANY_REP", "USER"] else "USER",
         account_status="ACTIVE"
     )
     db.add(user)

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getCompanyDetailApi, createContactApi, deleteContactApi, archiveEngagementRecordApi } from '../services/api';
+import { getCompanyDetailApi, createContactApi, deleteContactApi, archiveEngagementRecordApi, deactivateCompanyApi } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from '../components/StatusBadge';
 import { RecordVisitModal } from '../components/RecordVisitModal';
 import { ActivityModal } from '../components/ActivityModal';
+import { EditCompanyModal } from '../components/EditCompanyModal';
+import { EditContactModal } from '../components/EditContactModal';
 import { Modal } from '../components/Modal';
 import {
   Building2,
@@ -21,7 +23,10 @@ import {
   ArrowLeft,
   Archive,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Edit3,
+  Edit,
+  Power
 } from 'lucide-react';
 
 export const CompanyDetail = () => {
@@ -38,6 +43,19 @@ export const CompanyDetail = () => {
   const [isVisitModalOpen, setIsVisitModalOpen] = useState(false);
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [isAddContactOpen, setIsAddContactOpen] = useState(false);
+  const [isEditCompanyOpen, setIsEditCompanyOpen] = useState(false);
+  const [editingContact, setEditingContact] = useState(null);
+  const [editingVisit, setEditingVisit] = useState(null);
+
+  const handleToggleArchive = async () => {
+    if (!company) return;
+    try {
+      await deactivateCompanyApi(company.company_id, user?.user_id);
+      showToast(company.status === 'ARCHIVED' ? "Company profile unarchived." : "Company profile archived.");
+    } catch (err) {
+      alert("Failed to update company status.");
+    }
+  };
 
   // New contact form state
   const [contactName, setContactName] = useState('');
@@ -203,27 +221,46 @@ export const CompanyDetail = () => {
             )}
           </div>
 
-          {/* Action buttons (UC-006 & UC-008 entry points) */}
-          <div className="flex flex-wrap items-center gap-2 self-start lg:self-center">
-            <button
-              onClick={() => setIsVisitModalOpen(true)}
-              className="px-4 py-2 text-xs font-semibold rounded-xl bg-brand-600 hover:bg-brand-700 text-white shadow-sm flex items-center gap-1.5 transition-all"
-            >
-              <CalendarCheck className="w-4 h-4" /> Record Visit (UC-006)
-            </button>
-            <button
-              onClick={() => setIsActivityModalOpen(true)}
-              className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 transition-all"
-            >
-              <Briefcase className="w-4 h-4 text-brand-600" /> Draft Drive (UC-008)
-            </button>
-            <button
-              onClick={() => setIsAddContactOpen(true)}
-              className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 flex items-center gap-1 transition-all"
-            >
-              <Plus className="w-3.5 h-3.5" /> Add Contact
-            </button>
-          </div>
+          {/* Action buttons */}
+          {(user?.role === 'COORDINATOR' || user?.role === 'ADMIN') && (
+            <div className="flex flex-wrap items-center gap-2 self-start lg:self-center">
+              <button
+                onClick={() => setIsVisitModalOpen(true)}
+                className="px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white shadow-md shadow-brand-500/20 flex items-center gap-1.5 transition-all active:scale-95"
+              >
+                <CalendarCheck className="w-4 h-4" /> Record Visit
+              </button>
+              <button
+                onClick={() => setIsEditCompanyOpen(true)}
+                className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 transition-all"
+              >
+                <Edit3 className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" /> Edit Profile
+              </button>
+              <button
+                onClick={() => setIsActivityModalOpen(true)}
+                className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 transition-all"
+              >
+                <Briefcase className="w-4 h-4 text-brand-600 dark:text-brand-400" /> Draft Drive
+              </button>
+              <button
+                onClick={() => setIsAddContactOpen(true)}
+                className="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 flex items-center gap-1 transition-all"
+              >
+                <Plus className="w-3.5 h-3.5" /> Add Contact
+              </button>
+              <button
+                onClick={handleToggleArchive}
+                title="Deactivate or Archive company profile"
+                className={`p-2 text-xs font-semibold rounded-xl border transition-all ${
+                  company.status === 'ARCHIVED'
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:border-emerald-800'
+                    : 'bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 border-slate-200 dark:bg-slate-800 dark:border-slate-700'
+                }`}
+              >
+                <Power className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Tab Navigation */}
@@ -366,9 +403,18 @@ export const CompanyDetail = () => {
                           {v.purpose}
                         </h4>
                       </div>
-                      <span className="text-[11px] text-slate-400">
-                        Logged by {v.recorder_name}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] text-slate-400">
+                          Logged by {v.recorder_name}
+                        </span>
+                        <button
+                          onClick={() => setEditingVisit(v)}
+                          title="Edit Visit Record (FR-018)"
+                          className="p-1 rounded-lg text-slate-400 hover:text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-950/30 transition-colors"
+                        >
+                          <Edit className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </div>
 
                     <div className="text-xs text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
@@ -499,13 +545,22 @@ export const CompanyDetail = () => {
                       </div>
                     </div>
 
-                    <button
-                      onClick={() => handleDeleteContact(contact.contact_id)}
-                      title="Remove contact"
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => setEditingContact(contact)}
+                        title="Edit Contact (FR-013)"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-950/30 transition-colors"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteContact(contact.contact_id)}
+                        title="Remove contact (FR-014)"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -588,20 +643,45 @@ export const CompanyDetail = () => {
         </form>
       </Modal>
 
-      {/* Record Visit Modal */}
+      {/* Record or Edit Visit Modal (UC-006 & FR-018) */}
       <RecordVisitModal
-        isOpen={isVisitModalOpen}
+        isOpen={isVisitModalOpen || !!editingVisit}
+        visitToEdit={editingVisit}
         initialCompanyId={parseInt(id)}
-        onClose={() => setIsVisitModalOpen(false)}
+        onClose={() => {
+          setIsVisitModalOpen(false);
+          setEditingVisit(null);
+        }}
         onSuccess={showToast}
       />
 
-      {/* Draft Activity Modal */}
+      {/* Draft Activity Modal (UC-008) */}
       <ActivityModal
         isOpen={isActivityModalOpen}
         initialCompanyId={parseInt(id)}
         onClose={() => setIsActivityModalOpen(false)}
         onSuccess={showToast}
+      />
+
+      {/* Edit Company Profile Modal (FR-008) */}
+      <EditCompanyModal
+        isOpen={isEditCompanyOpen}
+        onClose={() => setIsEditCompanyOpen(false)}
+        company={company}
+        onCompanyUpdated={(updated) => {
+          setCompany(updated);
+          showToast("Company profile updated successfully.");
+        }}
+      />
+
+      {/* Edit Contact Modal (FR-013) */}
+      <EditContactModal
+        isOpen={!!editingContact}
+        onClose={() => setEditingContact(null)}
+        contact={editingContact}
+        onContactUpdated={() => {
+          showToast("Company contact updated successfully.");
+        }}
       />
     </div>
   );

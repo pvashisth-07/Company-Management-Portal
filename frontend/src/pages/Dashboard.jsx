@@ -13,11 +13,12 @@ import {
   CheckCircle2,
   Clock,
   Plus,
-  Send,
   ArrowRight,
-  TrendingUp,
   History,
-  Activity
+  BarChart3,
+  Sparkles,
+  Compass,
+  Layers
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -33,7 +34,7 @@ import {
 } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 
-const CHART_COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#64748b'];
+const CHART_COLORS = ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ec4899', '#64748b'];
 
 export const Dashboard = () => {
   const { user } = useAuth();
@@ -69,6 +70,8 @@ export const Dashboard = () => {
     fetchStats();
   };
 
+  const isPrivileged = user?.role === 'COORDINATOR' || user?.role === 'ADMIN' || user?.role === 'APPROVER';
+
   const industryChartData = stats?.industry_breakdown
     ? Object.entries(stats.industry_breakdown).map(([name, value]) => ({ name, value }))
     : [];
@@ -81,62 +84,104 @@ export const Dashboard = () => {
     : [];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fadeIn">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 p-4 rounded-xl bg-emerald-600 text-white shadow-xl flex items-center gap-2 animate-bounce">
+        <div className="fixed bottom-6 right-6 z-50 p-4 rounded-2xl bg-emerald-600 text-white shadow-2xl flex items-center gap-2.5 animate-bounce">
           <CheckCircle2 className="w-5 h-5" />
-          <span className="text-sm font-semibold">{toastMessage}</span>
+          <span className="text-xs font-bold">{toastMessage}</span>
         </div>
       )}
 
-      {/* Top Banner & Quick Actions */}
-      <div className="bg-gradient-to-r from-brand-700 via-brand-600 to-indigo-700 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
-        <div className="absolute right-0 top-0 bottom-0 opacity-10 pointer-events-none flex items-center pr-6">
-          <Building2 className="w-64 h-64" />
+      {/* Hero Banner with Modern Gradient */}
+      <div className="bg-gradient-to-r from-brand-700 via-indigo-700 to-violet-800 dark:from-slate-900 dark:via-indigo-950 dark:to-violet-950 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-brand-500/10 relative overflow-hidden border border-white/10">
+        <div className="absolute right-0 top-0 bottom-0 opacity-10 pointer-events-none flex items-center pr-8">
+          <Building2 className="w-72 h-72 text-white" />
         </div>
-        <div className="relative z-10 max-w-2xl">
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/20 backdrop-blur mb-2">
-            Placement Session 2026-27 | T&P Operations
-          </span>
+        
+        <div className="relative z-10 max-w-2xl space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/15 dark:bg-white/10 backdrop-blur-md border border-white/20">
+            <Sparkles className="w-3.5 h-3.5 text-brand-200" />
+            <span>Campus Placement & Corporate Hub</span>
+          </div>
+
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Institutional Company Engagement Portal
+            Welcome back, {user?.name || 'Portal Member'}
           </h1>
-          <p className="text-brand-100 text-sm mt-1">
-            Welcome back, <span className="font-semibold text-white">{user?.name}</span> ({user?.role}). 
-            Track company relationships, recruitment drives, campus visits, and approval workflows.
+          <p className="text-brand-100 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Role: <span className="font-semibold text-white uppercase tracking-wider">{user?.role || 'USER'}</span>. 
+            Monitor corporate partners, active recruitment drives, institutional visits, and workflow schedules.
           </p>
 
-          {/* Quick Action Buttons */}
-          <div className="flex flex-wrap gap-2.5 mt-5">
-            <button
-              onClick={() => setIsVisitModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-white text-brand-700 font-semibold text-xs shadow hover:bg-brand-50 flex items-center gap-1.5 transition-all"
-            >
-              <CalendarCheck className="w-4 h-4 text-brand-600" />
-              Record Visit (UC-006)
-            </button>
-            <button
-              onClick={() => setIsActivityModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 backdrop-blur flex items-center gap-1.5 transition-all"
-            >
-              <Briefcase className="w-4 h-4" />
-              Draft Drive (UC-008)
-            </button>
-            <button
-              onClick={() => setIsCompanyModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 backdrop-blur flex items-center gap-1.5 transition-all"
-            >
-              <Plus className="w-4 h-4" />
-              Add Company (FR-006)
-            </button>
+          {/* Quick Actions */}
+          <div className="flex flex-wrap gap-2.5 pt-3">
+            {isPrivileged ? (
+              <>
+                <button
+                  onClick={() => setIsVisitModalOpen(true)}
+                  className="px-3.5 py-2 rounded-xl bg-white text-brand-700 font-bold text-xs shadow-md hover:bg-brand-50 flex items-center gap-1.5 transition-all active:scale-95"
+                >
+                  <CalendarCheck className="w-4 h-4 text-brand-600" />
+                  Record Visit
+                </button>
+                <button
+                  onClick={() => setIsActivityModalOpen(true)}
+                  className="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs border border-white/20 backdrop-blur flex items-center gap-1.5 transition-all active:scale-95"
+                >
+                  <Briefcase className="w-4 h-4" />
+                  Draft Drive
+                </button>
+                <button
+                  onClick={() => setIsCompanyModalOpen(true)}
+                  className="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs border border-white/20 backdrop-blur flex items-center gap-1.5 transition-all active:scale-95"
+                >
+                  <Plus className="w-4 h-4" />
+                  New Company
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigate('/companies')}
+                  className="px-3.5 py-2 rounded-xl bg-white text-brand-700 font-bold text-xs shadow-md hover:bg-brand-50 flex items-center gap-1.5 transition-all active:scale-95"
+                >
+                  <Building2 className="w-4 h-4 text-brand-600" />
+                  Explore Companies
+                </button>
+                <button
+                  onClick={() => navigate('/activities')}
+                  className="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs border border-white/20 backdrop-blur flex items-center gap-1.5 transition-all active:scale-95"
+                >
+                  <Briefcase className="w-4 h-4" />
+                  Browse Recruitment Drives
+                </button>
+                <button
+                  onClick={() => navigate('/visits')}
+                  className="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs border border-white/20 backdrop-blur flex items-center gap-1.5 transition-all active:scale-95"
+                >
+                  <CalendarCheck className="w-4 h-4" />
+                  View Campus Visits
+                </button>
+              </>
+            )}
+
             {(user?.role === 'APPROVER' || user?.role === 'ADMIN') && (
               <button
                 onClick={() => navigate('/approvals')}
-                className="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs shadow flex items-center gap-1.5 transition-all"
+                className="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs shadow-md flex items-center gap-1.5 transition-all active:scale-95"
               >
                 <CheckCircle2 className="w-4 h-4" />
                 Review Queue ({stats?.pending_approvals || 0})
+              </button>
+            )}
+
+            {user?.role === 'MANAGEMENT' && (
+              <button
+                onClick={() => navigate('/reports')}
+                className="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-md flex items-center gap-1.5 transition-all active:scale-95"
+              >
+                <BarChart3 className="w-4 h-4" />
+                Management Reports
               </button>
             )}
           </div>
@@ -146,17 +191,17 @@ export const Dashboard = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title="Total Partner Companies"
+          title="Partner Companies"
           value={stats?.total_companies ?? '...'}
-          subtitle={`${stats?.active_companies || 0} currently active`}
+          subtitle={`${stats?.active_companies || 0} active corporate partners`}
           icon={Building2}
-          color="blue"
+          color="indigo"
           trend="+15%"
         />
         <StatCard
-          title="Campus Visits Recorded"
+          title="Documented Visits"
           value={stats?.total_visits ?? '...'}
-          subtitle="Documented meetings & MoUs"
+          subtitle="Campus meetings & institutional MoUs"
           icon={CalendarCheck}
           color="purple"
           trend="+22%"
@@ -164,14 +209,14 @@ export const Dashboard = () => {
         <StatCard
           title="Recruitment Drives"
           value={stats?.total_activities ?? '...'}
-          subtitle={`${stats?.approved_activities || 0} approved & scheduled`}
+          subtitle={`${stats?.approved_activities || 0} scheduled & completed`}
           icon={Briefcase}
           color="emerald"
         />
         <StatCard
           title="Pending Approvals"
           value={stats?.pending_approvals ?? '...'}
-          subtitle="Awaiting Approver review"
+          subtitle="Awaiting administrative sign-off"
           icon={Clock}
           color="amber"
         />
@@ -180,17 +225,17 @@ export const Dashboard = () => {
       {/* Analytics Visualizations */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Industry Distribution Chart */}
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="bg-white/80 dark:bg-[#111728]/80 backdrop-blur-xl p-6 rounded-3xl border border-slate-200/70 dark:border-slate-800/80 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+              <h3 className="font-extrabold text-slate-900 dark:text-white text-sm">
                 Industry & Sector Diversity
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Distribution of partnered recruiting organizations
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Breakdown of partnered organizations
               </p>
             </div>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 dark:bg-brand-950/40 dark:text-brand-300">
+            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-600 dark:bg-brand-950/50 dark:text-brand-300 border border-brand-200/50 dark:border-brand-800/50">
               {industryChartData.length} Sectors
             </span>
           </div>
@@ -204,7 +249,7 @@ export const Dashboard = () => {
                   cy="50%"
                   innerRadius={60}
                   outerRadius={90}
-                  paddingAngle={4}
+                  paddingAngle={5}
                   dataKey="value"
                 >
                   {industryChartData.map((entry, index) => (
@@ -213,11 +258,12 @@ export const Dashboard = () => {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1e293b',
-                    borderColor: '#334155',
+                    backgroundColor: '#0f172a',
+                    borderColor: '#1e293b',
                     color: '#f8fafc',
-                    borderRadius: '8px',
-                    fontSize: '12px'
+                    borderRadius: '12px',
+                    fontSize: '12px',
+                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)'
                   }}
                 />
                 <Legend 
@@ -232,21 +278,21 @@ export const Dashboard = () => {
         </div>
 
         {/* Activity Status Pipeline Chart */}
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="bg-white/80 dark:bg-[#111728]/80 backdrop-blur-xl p-6 rounded-3xl border border-slate-200/70 dark:border-slate-800/80 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+              <h3 className="font-extrabold text-slate-900 dark:text-white text-sm">
                 Recruitment Drive Pipeline
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Status progression across the recruitment lifecycle
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Lifecycle status of on-campus and virtual hiring drives
               </p>
             </div>
             <button
               onClick={() => navigate('/activities')}
-              className="text-xs font-semibold text-brand-600 hover:text-brand-700 dark:text-brand-400 flex items-center gap-1"
+              className="text-xs font-bold text-brand-600 hover:text-brand-700 dark:text-brand-400 flex items-center gap-1 transition-colors"
             >
-              View Drives <ArrowRight className="w-3.5 h-3.5" />
+              View All Drives <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
@@ -263,49 +309,51 @@ export const Dashboard = () => {
                 <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} allowDecimals={false} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1e293b',
-                    borderColor: '#334155',
+                    backgroundColor: '#0f172a',
+                    borderColor: '#1e293b',
                     color: '#f8fafc',
-                    borderRadius: '8px',
+                    borderRadius: '12px',
                     fontSize: '12px'
                   }}
                 />
-                <Bar dataKey="count" fill="#3b82f6" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="count" fill="#6366f1" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
       </div>
 
-      {/* Recent Engagement History Feed (FR-030 to FR-032) */}
-      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <History className="w-5 h-5 text-brand-600 dark:text-brand-400" />
+      {/* Recent Engagement History Feed */}
+      <div className="bg-white/80 dark:bg-[#111728]/80 backdrop-blur-xl p-6 rounded-3xl border border-slate-200/70 dark:border-slate-800/80 shadow-sm">
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-brand-50 dark:bg-brand-950/50 flex items-center justify-center text-brand-600 dark:text-brand-400">
+              <History className="w-5 h-5" />
+            </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
-                Recent Institutional Engagement Activity (FR-030)
+              <h3 className="font-extrabold text-slate-900 dark:text-white text-sm">
+                Recent Engagement History
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Audited timeline of visits, drives, contact updates, and approvals
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Audited timeline of campus visits, drives, and institutional updates
               </p>
             </div>
           </div>
           <button
             onClick={() => navigate('/reports')}
-            className="text-xs font-semibold text-brand-600 hover:text-brand-700 dark:text-brand-400 flex items-center gap-1"
+            className="text-xs font-bold text-brand-600 hover:text-brand-700 dark:text-brand-400 flex items-center gap-1 transition-colors"
           >
-            Export All Records <ArrowRight className="w-3.5 h-3.5" />
+            Export Logs <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        <div className="divide-y divide-slate-100 dark:divide-slate-800">
+        <div className="divide-y divide-slate-100 dark:divide-slate-800/80">
           {stats?.recent_engagements?.length > 0 ? (
             stats.recent_engagements.map((item) => (
-              <div key={item.record_id} className="py-3 flex items-start justify-between text-xs hover:bg-slate-50 dark:hover:bg-slate-800/40 px-2 rounded-xl transition-colors">
-                <div className="space-y-1 max-w-2xl">
-                  <div className="flex items-center gap-2">
-                    <StatusBadge status={item.type} className="text-[10px] py-0 px-1.5" />
+              <div key={item.record_id} className="py-3.5 flex items-start justify-between text-xs hover:bg-slate-50/70 dark:hover:bg-slate-800/40 px-3 rounded-2xl transition-colors">
+                <div className="space-y-1.5 max-w-2xl">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <StatusBadge status={item.type} className="text-[10px] py-0 px-2" />
                     <span className="font-semibold text-slate-800 dark:text-slate-200">
                       {item.description}
                     </span>
@@ -318,14 +366,14 @@ export const Dashboard = () => {
                 </div>
                 <button
                   onClick={() => navigate(`/companies/${item.company_id}`)}
-                  className="px-2 py-1 text-[11px] font-medium text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/50 rounded-lg transition-colors flex-shrink-0"
+                  className="px-3 py-1.5 text-xs font-bold text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/60 rounded-xl transition-colors flex-shrink-0"
                 >
                   View Company →
                 </button>
               </div>
             ))
           ) : (
-            <p className="text-xs text-slate-400 py-4 text-center">No recent engagements found.</p>
+            <p className="text-xs text-slate-400 py-6 text-center font-medium">No recent engagement records found.</p>
           )}
         </div>
       </div>

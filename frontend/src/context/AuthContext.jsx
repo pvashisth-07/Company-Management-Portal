@@ -1,20 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { loginApi, getAllUsersApi } from '../services/api';
+import { loginApi, registerApi, getAllUsersApi } from '../services/api';
 
 const AuthContext = createContext(null);
 
-const DEFAULT_USER = {
-  user_id: 1,
-  name: "Hitesh Jain",
-  email: "hitesh.coordinator@lnmiit.ac.in",
-  role: "COORDINATOR",
-  account_status: "ACTIVE"
-};
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('cep_user');
-    return saved ? JSON.parse(saved) : DEFAULT_USER;
+    try {
+      const saved = localStorage.getItem('cep_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      return null;
+    }
   });
 
   const [allUsers, setAllUsers] = useState([]);
@@ -46,8 +42,22 @@ export const AuthProvider = ({ children }) => {
     return res.data;
   };
 
+  const signup = async (userData) => {
+    const payload = {
+      name: userData.name,
+      email: userData.email,
+      password: userData.password,
+      role: userData.role || "USER"
+    };
+    const res = await registerApi(payload);
+    setUser(res.data);
+    await fetchUsers();
+    return res.data;
+  };
+
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('cep_user');
   };
 
   // Quick switch for prototype testing & demonstration
@@ -56,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, switchUser, allUsers, refreshUsers: fetchUsers }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, switchUser, allUsers, refreshUsers: fetchUsers }}>
       {children}
     </AuthContext.Provider>
   );

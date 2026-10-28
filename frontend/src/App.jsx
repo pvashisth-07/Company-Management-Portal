@@ -24,11 +24,11 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 transition-colors">
+    <div className="min-h-screen flex flex-col bg-[#f8fafd] dark:bg-[#0a0e1a] transition-colors">
       <Navbar />
-      <div className="flex-1 flex max-w-7xl w-full mx-auto">
+      <div className="flex-1 flex max-w-[1440px] w-full mx-auto">
         <Sidebar />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-5xl overflow-x-hidden">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 w-full overflow-x-hidden">
           {children}
         </main>
       </div>
